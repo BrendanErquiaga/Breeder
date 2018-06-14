@@ -14,7 +14,6 @@ import static com.erquiaga.breeder.utils.BreederConstants.*;
 
 public class Breeder implements RequestStreamHandler {
     JSONParser parser = new JSONParser();
-
     protected final static String PARENT_ONE_ID_KEY = "parentOneId";
     protected final static String PARENT_TWO_ID_KEY = "parentTwoId";
 
@@ -22,6 +21,50 @@ public class Breeder implements RequestStreamHandler {
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException
     {
         LambdaLogger logger = context.getLogger();
+        logger.log("Handling API Gateway Proxy request");
+        InputStream inputStreamCopy = inputStream;
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStreamCopy));
+
+        JSONObject responseJson = new JSONObject();
+
+        try {
+            JSONObject jsonEventObject = (JSONObject) parser.parse(reader);
+            logger.log(jsonEventObject.toJSONString());
+
+            switch ((String) jsonEventObject.get("httpMethod")) {
+                case "GET":
+                    responseJson = handleGetRequest(jsonEventObject, context);
+                    break;
+                case "POST":
+                    responseJson = handlePostRequest(jsonEventObject, context);
+                    break;
+                case "DELETE":
+                    responseJson = handleDeleteRequest(jsonEventObject, context);
+                    break;
+                case "PUT":
+                    responseJson = handlePutRequest(jsonEventObject, context);
+                    break;
+                default:
+                    responseJson.put("statusCode", "400");
+                    responseJson.put("message", "This method is not supported");
+                    break;
+            }
+        } catch (Exception e) {
+            logger.log("Exception: " + e.toString());
+            responseJson.put("statusCode", "400");
+            responseJson.put("exception", e);
+        }
+
+        OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
+        writer.write(responseJson.toJSONString());
+        writer.close();
+    }
+
+    public JSONObject handleGetRequest(JSONObject jsonEventObject, Context context)
+    {
+        LambdaLogger logger = context.getLogger();
+        logger.log("Handling GET request");
 
         JSONObject responseJson = new JSONObject();
         String responseCode = "200";
@@ -30,13 +73,9 @@ public class Breeder implements RequestStreamHandler {
         int parentTwoId = 1;
         String organismType = "-";
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
         try {
-            JSONObject event = (JSONObject)parser.parse(reader);
-            logger.log(event.toJSONString());
-            if (event.get("queryStringParameters") != null) {
-                JSONObject queryStringParameters = (JSONObject)event.get("queryStringParameters");
+            if (jsonEventObject.get("queryStringParameters") != null) {
+                JSONObject queryStringParameters = (JSONObject)jsonEventObject.get("queryStringParameters");
 
                 parentOneId = Integer.parseInt(getParmeterIfExists(queryStringParameters, PARENT_ONE_ID_KEY,"0"));
                 parentTwoId = Integer.parseInt(getParmeterIfExists(queryStringParameters, PARENT_TWO_ID_KEY, "0"));
@@ -61,23 +100,54 @@ public class Breeder implements RequestStreamHandler {
 //                }
 //            }
             String breedingMessage = "This should breed these things: "
-                    + parentOneId + " + " + parentTwoId + " = ???. Type: " + organismType;
+                    + parentOneId + " + " + parentTwoId + " = profit. Type: " + organismType;
 
             JSONObject responseBody = new JSONObject();
-            responseBody.put("input", event.toJSONString());
             responseBody.put("message", breedingMessage);
 
             responseJson.put("isBase64Encoded", false);
             responseJson.put("statusCode", responseCode);
             responseJson.put("body", responseBody.toString());
 
-        } catch (ParseException pex) {
+        } catch (Exception e) {
+            logger.log("Exception: " + e.toString());
             responseJson.put("statusCode", "400");
-            responseJson.put("exception", pex);
+            responseJson.put("exception", e);
         }
 
-        OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
-        writer.write(responseJson.toJSONString());
-        writer.close();
+        return responseJson;
+    }
+
+    protected JSONObject handlePutRequest(JSONObject jsonEventObject, Context context) {
+
+        JSONObject responseJson = new JSONObject();
+        JSONObject responseBody = new JSONObject();
+        responseBody.put("message", "This is a put...");
+        responseJson.put("statusCode", 200);
+        responseJson.put("body", responseBody.toString());
+
+        return responseJson;
+    }
+
+    protected JSONObject handleDeleteRequest(JSONObject jsonEventObject, Context context) {
+
+        JSONObject responseJson = new JSONObject();
+        JSONObject responseBody = new JSONObject();
+        responseBody.put("message", "This is a delete...");
+        responseJson.put("statusCode", 200);
+        responseJson.put("body", responseBody.toString());
+
+        return responseJson;
+    }
+
+    protected JSONObject handlePostRequest(JSONObject jsonEventObject, Context context) {
+
+        JSONObject responseJson = new JSONObject();
+        JSONObject responseBody = new JSONObject();
+        responseBody.put("message", "This is a post...");
+        responseJson.put("statusCode", 200);
+        responseJson.put("body", responseBody.toString());
+
+        return responseJson;
     }
 }
