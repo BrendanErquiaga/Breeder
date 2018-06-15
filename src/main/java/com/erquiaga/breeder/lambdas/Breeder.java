@@ -12,59 +12,21 @@ import java.io.*;
 import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
 import static com.erquiaga.breeder.utils.BreederConstants.*;
 
-public class Breeder implements RequestStreamHandler {
-    JSONParser parser = new JSONParser();
+public class Breeder extends ApiGatewayProxyLambda {
+
     protected final static String PARENT_ONE_ID_KEY = "parentOneId";
     protected final static String PARENT_TWO_ID_KEY = "parentTwoId";
 
     @Override
-    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException
-    {
-        LambdaLogger logger = context.getLogger();
-        logger.log("Handling API Gateway Proxy request");
-        InputStream inputStreamCopy = inputStream;
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStreamCopy));
-
-        JSONObject responseJson = new JSONObject();
-
-        try {
-            JSONObject jsonEventObject = (JSONObject) parser.parse(reader);
-            logger.log(jsonEventObject.toJSONString());
-
-            switch ((String) jsonEventObject.get("httpMethod")) {
-                case "GET":
-                    responseJson = handleGetRequest(jsonEventObject, context);
-                    break;
-                case "POST":
-                    responseJson = handlePostRequest(jsonEventObject, context);
-                    break;
-                case "DELETE":
-                    responseJson = handleDeleteRequest(jsonEventObject, context);
-                    break;
-                case "PUT":
-                    responseJson = handlePutRequest(jsonEventObject, context);
-                    break;
-                default:
-                    responseJson.put("statusCode", "400");
-                    responseJson.put("message", "This method is not supported");
-                    break;
-            }
-        } catch (Exception e) {
-            logger.log("Exception: " + e.toString());
-            responseJson.put("statusCode", "400");
-            responseJson.put("exception", e);
-        }
-
-        OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
-        writer.write(responseJson.toJSONString());
-        writer.close();
+    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+        super.handleRequest(inputStream, outputStream, context);
     }
 
-    public JSONObject handleGetRequest(JSONObject jsonEventObject, Context context)
+    @Override
+    public JSONObject handlePostRequest(JSONObject jsonEventObject, Context context)
     {
         LambdaLogger logger = context.getLogger();
-        logger.log("Handling GET request");
+        logger.log("Handling POST request");
 
         JSONObject responseJson = new JSONObject();
         String responseCode = "200";
@@ -114,39 +76,6 @@ public class Breeder implements RequestStreamHandler {
             responseJson.put("statusCode", "400");
             responseJson.put("exception", e);
         }
-
-        return responseJson;
-    }
-
-    protected JSONObject handlePutRequest(JSONObject jsonEventObject, Context context) {
-
-        JSONObject responseJson = new JSONObject();
-        JSONObject responseBody = new JSONObject();
-        responseBody.put("message", "This is a put...");
-        responseJson.put("statusCode", 200);
-        responseJson.put("body", responseBody.toString());
-
-        return responseJson;
-    }
-
-    protected JSONObject handleDeleteRequest(JSONObject jsonEventObject, Context context) {
-
-        JSONObject responseJson = new JSONObject();
-        JSONObject responseBody = new JSONObject();
-        responseBody.put("message", "This is a delete...");
-        responseJson.put("statusCode", 200);
-        responseJson.put("body", responseBody.toString());
-
-        return responseJson;
-    }
-
-    protected JSONObject handlePostRequest(JSONObject jsonEventObject, Context context) {
-
-        JSONObject responseJson = new JSONObject();
-        JSONObject responseBody = new JSONObject();
-        responseBody.put("message", "This is a post...");
-        responseJson.put("statusCode", 200);
-        responseJson.put("body", responseBody.toString());
 
         return responseJson;
     }
