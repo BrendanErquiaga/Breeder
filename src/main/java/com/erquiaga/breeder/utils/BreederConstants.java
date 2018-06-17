@@ -4,6 +4,7 @@ public class BreederConstants {
 
     //JSON Keys
     public final static String ORGANISM_TYPE_KEY = "type";
+    public final static String ORGANISM_ID_KEY = "id";
     public final static String DNA_KEY = "dna";
 
     //AWS Keys
