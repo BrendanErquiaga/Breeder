@@ -2,21 +2,21 @@ package com.erquiaga.breeder.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
-import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
+import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_TYPE_KEY;
 import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
-import static com.erquiaga.breeder.utils.BreederConstants.*;
 
-public class Breeder extends ApiGatewayProxyLambda {
+public class BreedOrganisms extends ApiGatewayProxyLambda {
 
     protected final static String PARENT_ONE_ID_KEY = "parentOneId";
     protected final static String PARENT_TWO_ID_KEY = "parentTwoId";
 
+    //Handle everything under /breeding/breed
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         super.handleRequest(inputStream, outputStream, context);
