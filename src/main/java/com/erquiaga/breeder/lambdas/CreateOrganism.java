@@ -12,7 +12,6 @@ import com.erquiaga.breeder.models.Organism;
 import com.google.gson.Gson;
 
 import static com.erquiaga.breeder.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_ARN;
-import static com.erquiaga.breeder.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_NAME;
 
 public class CreateOrganism {
 
@@ -30,7 +29,6 @@ public class CreateOrganism {
 
         StartExecutionRequest stepFunctionRequest = new StartExecutionRequest();
         stepFunctionRequest.setInput(organismJsonString);
-        stepFunctionRequest.setName(SAVE_ORGANISM_STEP_FUNCTION_NAME);
         stepFunctionRequest.setStateMachineArn(SAVE_ORGANISM_STEP_FUNCTION_ARN);
 
         StartExecutionResult startExecutionResult = awsStepFunctionsClient.startExecution(stepFunctionRequest);

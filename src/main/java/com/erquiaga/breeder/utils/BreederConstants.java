@@ -11,6 +11,5 @@ public class BreederConstants {
     public final static String BREEDER_S3_BUCKET = "breeder-collections";
     public final static String ORGANISM_FOLDER = "organisms/";
     public final static String ORGANISM_FILE_SUFFIX = ".json";
-    public final static String SAVE_ORGANISM_STEP_FUNCTION_NAME = "SaveBreederOrganism";
     public final static String SAVE_ORGANISM_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:SaveBreederOrganism";
 }
