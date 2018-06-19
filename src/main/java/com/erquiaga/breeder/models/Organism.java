@@ -1,17 +1,19 @@
 package com.erquiaga.breeder.models;
 
-public class Organism {
-    public int id;
-    public String type;
-    public String breedingRulesJson;
-    public String metadataJson;
-    public String dnaJson;
+import org.json.simple.JSONObject;
 
-    public int getId() {
+public class Organism {
+    public String id;
+    public String type;
+    public JSONObject breedingRules;
+    public JSONObject metadata;
+    public JSONObject dna;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -23,36 +25,35 @@ public class Organism {
         this.type = type;
     }
 
-    public String getBreedingRules() {
-        return breedingRulesJson;
+    public JSONObject getBreedingRules() {
+        return breedingRules;
     }
 
-    public void setBreedingRules(String breedingRulesJson) {
-        this.breedingRulesJson = breedingRulesJson;
+    public void setBreedingRules(JSONObject breedingRulesJson) {
+        this.breedingRules = breedingRulesJson;
     }
 
-    public String getMetadata() {
-        return metadataJson;
+    public JSONObject getMetadata() {
+        return metadata;
     }
 
-    public void setMetadata(String metadataJson) {
-        this.metadataJson = metadataJson;
+    public void setMetadata(JSONObject metadataJson) {
+        this.metadata = metadataJson;
     }
 
-    public String getDna() {
-        return dnaJson;
+    public JSONObject getDna() {
+        return dna;
     }
 
-    public void setDna(String dnaJson) {
-        this.dnaJson = dnaJson;
+    public void setDna(JSONObject dnaJson) {
+        this.dna = dnaJson;
     }
 
-    public Organism(int id, String type, String breedingRulesJson, String metadataJson, String dnaJson) {
-        this.id = id;
+    public Organism(String type, JSONObject breedingRules, JSONObject metadata, JSONObject dna) {
         this.type = type;
-        this.breedingRulesJson = breedingRulesJson;
-        this.metadataJson = metadataJson;
-        this.dnaJson = dnaJson;
+        this.breedingRules = breedingRules;
+        this.metadata = metadata;
+        this.dna = dna;
     }
 
     public Organism() {
@@ -63,9 +64,9 @@ public class Organism {
         StringBuilder sb = new StringBuilder();
         sb.append("ID: ").append(getId());
         sb.append("Type: ").append(getType());
-        sb.append("Breeding Rules: ").append(getBreedingRules());
-        sb.append("Metadata: ").append(getMetadata());
-        sb.append("DNA: ").append(getDna());
+        sb.append("Breeding Rules: ").append(getBreedingRules().toJSONString());
+        sb.append("Metadata: ").append(getMetadata().toJSONString());
+        sb.append("DNA: ").append(getDna().toJSONString());
         return sb.toString();
     }
 }

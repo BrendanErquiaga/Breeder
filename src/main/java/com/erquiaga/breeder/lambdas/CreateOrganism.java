@@ -2,19 +2,17 @@ package com.erquiaga.breeder.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsAsyncClient;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsAsyncClientBuilder;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsClient;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsClientBuilder;
+import com.amazonaws.services.stepfunctions.model.StartExecutionRequest;
+import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import com.erquiaga.breeder.models.Organism;
 import com.google.gson.Gson;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-
-import static com.erquiaga.breeder.utils.BreederConstants.*;
+import static com.erquiaga.breeder.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_ARN;
+import static com.erquiaga.breeder.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_NAME;
 
 public class CreateOrganism {
 
@@ -23,24 +21,21 @@ public class CreateOrganism {
         LambdaLogger logger = context.getLogger();
         logger.log("Creating an organism");
 
+        //TODO Write a better UUID system
+        organism.setId(Long.toString(System.currentTimeMillis()));
         Gson gson = new Gson();
         String organismJsonString = gson.toJson(organism);
-        String organismKey = ORGANISM_FOLDER + organism.getId() + ORGANISM_FILE_SUFFIX;
 
-        try {
-            AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-            InputStream inputStream = new ByteArrayInputStream(organismJsonString.getBytes(StandardCharsets.UTF_8));
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentType("application/json");
+        AWSStepFunctionsClient awsStepFunctionsClient = (AWSStepFunctionsClient) AWSStepFunctionsClientBuilder.defaultClient();
 
-            PutObjectRequest organismObjectRequest =
-                    new PutObjectRequest(BREEDER_S3_BUCKET, organismKey, inputStream, metadata);
+        StartExecutionRequest stepFunctionRequest = new StartExecutionRequest();
+        stepFunctionRequest.setInput(organismJsonString);
+        stepFunctionRequest.setName(SAVE_ORGANISM_STEP_FUNCTION_NAME);
+        stepFunctionRequest.setStateMachineArn(SAVE_ORGANISM_STEP_FUNCTION_ARN);
 
-            s3Client.putObject(organismObjectRequest);
-        } catch (Exception e) {
-            logger.log("Exception: " + e.toString());
-            return "Error creating a new organism.";
-        }
+        StartExecutionResult startExecutionResult = awsStepFunctionsClient.startExecution(stepFunctionRequest);
+
+        logger.log(startExecutionResult.toString());
 
         return "This should have created an organism with ID: " + organism.getId();
     }
