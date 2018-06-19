@@ -7,14 +7,13 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 
 import static com.erquiaga.breeder.utils.BreederConstants.*;
 import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_FILE_SUFFIX;
+import static com.erquiaga.breeder.utils.BreederUtils.getOrganismJson;
 import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
 
 public class HandleOrganism extends ApiGatewayProxyLambda {
@@ -40,14 +39,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
             }
 
             if(!"".equals(organismId)) {
-                String organismKey = ORGANISM_FOLDER + organismId + ORGANISM_FILE_SUFFIX;
-
-                AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-                S3Object fetchedOrganism = s3Client.getObject(BREEDER_S3_BUCKET, organismKey);
-                InputStream organismDataStream = fetchedOrganism.getObjectContent();
-                JSONParser jsonParser = new JSONParser();
-                JSONObject organismJson = (JSONObject)jsonParser.parse(
-                        new InputStreamReader(organismDataStream, "UTF-8"));
+                JSONObject organismJson = getOrganismJson(organismId);
 
                 responseJson.put("isBase64Encoded", false);
                 responseJson.put("statusCode", responseCode);

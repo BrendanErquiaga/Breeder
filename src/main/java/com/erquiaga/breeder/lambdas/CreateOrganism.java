@@ -12,6 +12,7 @@ import com.erquiaga.breeder.models.Organism;
 import com.google.gson.Gson;
 
 import static com.erquiaga.breeder.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_ARN;
+import static com.erquiaga.breeder.utils.BreederUtils.getNextOrganismId;
 
 public class CreateOrganism {
 
@@ -20,8 +21,7 @@ public class CreateOrganism {
         LambdaLogger logger = context.getLogger();
         logger.log("Creating an organism");
 
-        //TODO Write a better UUID system
-        organism.setId(Long.toString(System.currentTimeMillis()));
+        organism.setId(getNextOrganismId());
         Gson gson = new Gson();
         String organismJsonString = gson.toJson(organism);
 
