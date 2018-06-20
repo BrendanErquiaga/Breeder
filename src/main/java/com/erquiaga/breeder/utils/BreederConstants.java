@@ -9,11 +9,19 @@ public class BreederConstants {
     //JSON Keys
     public final static String ORGANISM_TYPE_KEY = "type";
     public final static String ORGANISM_ID_KEY = "id";
-    public final static String DNA_KEY = "dna";
     public final static String METADATA_KEY = "metadata";
     public final static String BREEDING_RULES_KEY = "breedingRules";
     public final static String ORGANISM_NAME_KEY = "name";
     public final static String PARENT_NAMES_KEY = "parents";
+    public final static String DNA_KEY = "dna";
+    public final static String CHROMOSOMES_KEY = "chromosomes";
+    public final static String CHROMOSOME_ID_KEY = "chromosomeID";
+    public final static String TRAITS_KEY = "traits";
+    public final static String TRAIT_ID_KEY = "traitId";
+    public final static String GENE_A_KEY = "geneA";
+    public final static String GENE_B_KEY = "geneB";
+    public final static String GENE_EXPRESSION_VALUE_KEY = "expressionValue";
+    public final static String GENE_COMBINATION_VALUE_KEY = "combinationValue";
 
     //Generated JSON Keys
     public final static String PARENT_ONE_ID_KEY = "parentOneId";

@@ -11,6 +11,7 @@ import java.util.Random;
 
 import static com.erquiaga.breeder.utils.BreederConstants.*;
 import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
+import static com.erquiaga.breeder.utils.DNACombiner.getOrganismDNA;
 
 public class CombineOrganisms {
     JSONParser parser = new JSONParser();
@@ -22,17 +23,17 @@ public class CombineOrganisms {
 
         try {
             JSONObject breedingDataJson = (JSONObject) parser.parse(breedingData);
-            JSONObject parentOneData = (JSONObject) breedingDataJson.get(PARENT_ONE_DATA_KEY);
-            JSONObject parentTwoData = (JSONObject) breedingDataJson.get(PARENT_TWO_DATA_KEY);
+            JSONObject p1Data = (JSONObject) breedingDataJson.get(PARENT_ONE_DATA_KEY);
+            JSONObject p2Data = (JSONObject) breedingDataJson.get(PARENT_TWO_DATA_KEY);
 
             String newOrganismId = getParmeterIfExists(breedingDataJson, CHILD_ORGANISM_ID_KEY,"");
 
             Organism newOrganism = new Organism();
             newOrganism.setId(newOrganismId);
 
-            setupOrganismDefaults(newOrganism, parentOneData, parentTwoData);
+            setupOrganismDefaults(newOrganism, p1Data, p2Data);
 
-            newOrganism.setDna(getOrganismDNA(parentOneData, parentTwoData));
+            newOrganism.setDna(getOrganismDNA(p1Data, p2Data));
 
             return newOrganism;
         } catch (ParseException e) {
@@ -41,33 +42,28 @@ public class CombineOrganisms {
         }
     }
 
-    private void setupOrganismDefaults(Organism organism, JSONObject parentOneData, JSONObject parentTwoData) {
+    private void setupOrganismDefaults(Organism organism, JSONObject p1Data, JSONObject p2Data) {
 
-        organism.setType(getParmeterIfExists(parentOneData, ORGANISM_TYPE_KEY, DEFAULT_ORGANISM_TYPE));
-        organism.setMetadata(getNewOrganismMetadata(parentOneData, parentTwoData));
-        organism.setBreedingRules((JSONObject)parentOneData.get(BREEDING_RULES_KEY));
+        organism.setType(getParmeterIfExists(p1Data, ORGANISM_TYPE_KEY, DEFAULT_ORGANISM_TYPE));
+        organism.setMetadata(getNewOrganismMetadata(p1Data, p2Data));
+        organism.setBreedingRules((JSONObject)p1Data.get(BREEDING_RULES_KEY));
     }
 
-    private JSONObject getOrganismDNA(JSONObject parentOneData, JSONObject parentTwoData) {
-        JSONObject dnaObject = new JSONObject();
-
-        return dnaObject;
-    }
-
-    private JSONObject getNewOrganismMetadata(JSONObject parentOneData, JSONObject parentTwoData) {
+    private JSONObject getNewOrganismMetadata(JSONObject p1Data, JSONObject p2Data) {
         JSONObject metadata = new JSONObject();
-        String parentOneName = (String)((JSONObject)parentOneData.get(METADATA_KEY)).get(ORGANISM_NAME_KEY);
-        String parentTwoName = (String)((JSONObject)parentTwoData.get(METADATA_KEY)).get(ORGANISM_NAME_KEY);
-        String[] parentNames = new String[] {parentOneName, parentTwoName};
+        String p1Name = (String)((JSONObject)p1Data.get(METADATA_KEY)).get(ORGANISM_NAME_KEY);
+        String p2Names = (String)((JSONObject)p2Data.get(METADATA_KEY)).get(ORGANISM_NAME_KEY);
+        String[] parentNames = new String[] {p1Name, p2Names};
 
-        metadata.put(ORGANISM_NAME_KEY, getNewOrganismName(parentOneName));
+        metadata.put(ORGANISM_NAME_KEY, getNewOrganismName(p1Name, p2Names));
         metadata.put(PARENT_NAMES_KEY, parentNames);
 
         return metadata;
     }
 
-    private String getNewOrganismName(String parentName) {
-        return getRandomName(3) + " child of " + parentName;
+    private String getNewOrganismName(String p1Name, String p2Name) {
+        int length = new Random().nextInt(8) + 3;
+        return getRandomName(length) + " spawn of " + p1Name + " & " + p2Name;
     }
 
     private String getRandomName(int length) {
