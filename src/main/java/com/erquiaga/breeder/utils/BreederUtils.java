@@ -32,12 +32,27 @@ public class BreederUtils {
     }
 
     public static JSONObject getOrganismJson(String organismId) throws IOException, ParseException {
-        String organismKey = ORGANISM_FOLDER + organismId + ORGANISM_FILE_SUFFIX;
-        AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-        S3Object fetchedOrganism = s3Client.getObject(BREEDER_S3_BUCKET, organismKey);
+        S3Object fetchedOrganism = getOrganismS3Object(organismId);
         InputStream organismDataStream = fetchedOrganism.getObjectContent();
         JSONParser jsonParser = new JSONParser();
 
         return (JSONObject)jsonParser.parse(new InputStreamReader(organismDataStream, "UTF-8"));
+    }
+
+    public static S3Object getOrganismS3Object(String organismId) {
+        AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
+
+        return s3Client.getObject(BREEDER_S3_BUCKET, getOrganismObjectKey(organismId));
+    }
+
+    public static boolean organismExists(String organismId) {
+        String organismKey = ORGANISM_FOLDER + organismId + ORGANISM_FILE_SUFFIX;
+        AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
+
+        return s3Client.doesObjectExist(BREEDER_S3_BUCKET, organismKey);
+    }
+
+    public static String getOrganismObjectKey(String organismId) {
+        return ORGANISM_FOLDER + organismId + ORGANISM_FILE_SUFFIX;
     }
 }
