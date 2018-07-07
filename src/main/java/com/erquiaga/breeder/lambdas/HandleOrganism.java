@@ -5,6 +5,10 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsClient;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsClientBuilder;
+import com.amazonaws.services.stepfunctions.model.StartExecutionRequest;
+import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -59,11 +63,60 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
 
     @Override
     protected JSONObject handlePutRequest(JSONObject jsonEventObject, Context context) {
+        LambdaLogger logger = context.getLogger();
+        logger.log("Updating Organism");
+
         JSONObject responseJson = new JSONObject();
-        JSONObject responseBody = new JSONObject();
-        responseBody.put("message", "This should update an organism");
-        responseJson.put("statusCode", 200);
-        responseJson.put("body", responseBody.toString());
+        JSONParser parser = new JSONParser();
+        String responseCode = "200";
+        String organismId = "";
+        try {
+            if (jsonEventObject.get("pathParameters") != null) {
+                JSONObject pathParameters = (JSONObject)jsonEventObject.get("pathParameters");
+                organismId = getParmeterIfExists(pathParameters, ORGANISM_ID_KEY, "");
+            }
+
+            JSONObject organismData = null;
+
+            if(jsonEventObject.get("body") != null) {
+                organismData = (JSONObject) parser.parse((String) jsonEventObject.get("body"));
+            }
+
+            if(!"".equals(organismId) && organismExists(organismId)) {
+                if(organismData == null || !isValidOrganismJson(organismData)) {
+                    responseJson.put("isBase64Encoded", false);
+                    responseJson.put("statusCode", "404");
+                    responseJson.put("body", "No Valid Organism Data Provided");
+                } else {
+                    String organismKey = getOrganismObjectKey(organismId);
+                    AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
+                    s3Client.deleteObject(BREEDER_S3_BUCKET, organismKey);
+                    AWSStepFunctionsClient awsStepFunctionsClient = (AWSStepFunctionsClient) AWSStepFunctionsClientBuilder.defaultClient();
+
+                    StartExecutionRequest stepFunctionRequest = new StartExecutionRequest();
+                    stepFunctionRequest.setInput(organismData.toJSONString());
+                    stepFunctionRequest.setStateMachineArn(SAVE_ORGANISM_STEP_FUNCTION_ARN);
+
+                    StartExecutionResult startExecutionResult = awsStepFunctionsClient.startExecution(stepFunctionRequest);
+
+                    logger.log(startExecutionResult.toString());
+
+                    String bodyMessage = "Updated Organism at this location - S3:" + BREEDER_S3_BUCKET + "/" + organismKey;
+
+                    responseJson.put("isBase64Encoded", false);
+                    responseJson.put("statusCode", responseCode);
+                    responseJson.put("body", bodyMessage);
+                }
+            } else {
+                responseJson.put("isBase64Encoded", false);
+                responseJson.put("statusCode", "404");
+                responseJson.put("body", "Organism not found!");
+            }
+        } catch (Exception e) {
+            logger.log("Exception: " + e.toString());
+            responseJson.put("statusCode", "400");
+            responseJson.put("exception", e);
+        }
 
         return responseJson;
     }

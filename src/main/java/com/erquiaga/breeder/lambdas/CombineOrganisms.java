@@ -55,15 +55,15 @@ public class CombineOrganisms {
         String p2Names = (String)((JSONObject)p2Data.get(METADATA_KEY)).get(ORGANISM_NAME_KEY);
         String[] parentNames = new String[] {p1Name, p2Names};
 
-        metadata.put(ORGANISM_NAME_KEY, getNewOrganismName(p1Name, p2Names));
+        metadata.put(ORGANISM_NAME_KEY, getNewOrganismName());
         metadata.put(PARENT_NAMES_KEY, parentNames);
 
         return metadata;
     }
 
-    private String getNewOrganismName(String p1Name, String p2Name) {
-        int length = new Random().nextInt(8) + 3;
-        return getRandomName(length) + " spawn of " + p1Name + " & " + p2Name;
+    private String getNewOrganismName() {
+        int length = new Random().nextInt(NEW_ORGANISM_MAX_NAME_LENGTH) + NEW_ORGANISM_MIN_NAME_LENGTH;
+        return getRandomName(length);
     }
 
     private String getRandomName(int length) {

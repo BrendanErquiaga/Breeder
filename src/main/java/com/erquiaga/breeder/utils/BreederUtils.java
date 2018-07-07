@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.erquiaga.breeder.utils.BreederConstants.BREEDER_S3_BUCKET;
-import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_FILE_SUFFIX;
-import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_FOLDER;
+import static com.erquiaga.breeder.utils.BreederConstants.*;
 
 public class BreederUtils {
 
@@ -54,5 +52,34 @@ public class BreederUtils {
 
     public static String getOrganismObjectKey(String organismId) {
         return ORGANISM_FOLDER + organismId + ORGANISM_FILE_SUFFIX;
+    }
+
+    public static boolean isValidOrganismJson(JSONObject organismJson) {
+        boolean isValid = true;
+
+        if(!organismJson.containsKey(ORGANISM_ID_KEY)) {
+            //Probably log about it
+            isValid = false;
+        } else if(!organismJson.containsKey(ORGANISM_TYPE_KEY)) {
+            //Probably log about it
+            isValid = false;
+        } else if(!organismJson.containsKey(BREEDING_RULES_KEY)) {
+            //Probably log about it
+            isValid = false;
+        } else if(!organismJson.containsKey(METADATA_KEY)) {
+            //Probably log about it
+            isValid = false;
+        } else if(!organismJson.containsKey(DNA_KEY)) {
+            //Probably log about it
+            isValid = false;
+        } else if(!((JSONObject)organismJson.get(METADATA_KEY)).containsKey(ORGANISM_NAME_KEY)) {
+            //Probably log about it
+            isValid = false;
+        } else if(!((JSONObject)organismJson.get(DNA_KEY)).containsKey(CHROMOSOMES_KEY)) {
+            //Probably log about it
+            isValid = false;
+        }
+
+        return isValid;
     }
 }
