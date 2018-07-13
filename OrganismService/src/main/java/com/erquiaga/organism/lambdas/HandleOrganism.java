@@ -1,23 +1,20 @@
-package com.erquiaga.breeder.lambdas;
+package com.erquiaga.organism.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.stepfunctions.AWSStepFunctionsClient;
 import com.amazonaws.services.stepfunctions.AWSStepFunctionsClientBuilder;
 import com.amazonaws.services.stepfunctions.model.StartExecutionRequest;
 import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
 
-import static com.erquiaga.breeder.utils.BreederConstants.*;
-import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_FILE_SUFFIX;
-import static com.erquiaga.breeder.utils.BreederUtils.*;
+import static com.erquiaga.organism.utils.BreederConstants.*;
+import static com.erquiaga.organism.utils.BreederUtils.*;
 
 public class HandleOrganism extends ApiGatewayProxyLambda {
 

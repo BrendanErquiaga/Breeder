@@ -1,4 +1,4 @@
-package com.erquiaga.breeder.lambdas;
+package com.erquiaga.organism.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -7,9 +7,9 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
-import static com.erquiaga.breeder.utils.BreederConstants.*;
-import static com.erquiaga.breeder.utils.BreederUtils.getOrganismJson;
-import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
+import static com.erquiaga.organism.utils.BreederConstants.*;
+import static com.erquiaga.organism.utils.BreederUtils.getOrganismJson;
+import static com.erquiaga.organism.utils.BreederUtils.getParmeterIfExists;
 
 public class GatherBreedingData {
 

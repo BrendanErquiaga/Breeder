@@ -1,4 +1,4 @@
-package com.erquiaga.breeder.models;
+package com.erquiaga.organism.models;
 
 public class OrganismIdentifier {
     public int id;

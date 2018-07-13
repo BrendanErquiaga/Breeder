@@ -1,4 +1,4 @@
-package com.erquiaga.breeder.models;
+package com.erquiaga.organism.models;
 
 import org.json.simple.JSONObject;
 

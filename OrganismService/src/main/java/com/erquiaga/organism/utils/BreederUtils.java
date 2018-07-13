@@ -1,4 +1,4 @@
-package com.erquiaga.breeder.utils;
+package com.erquiaga.organism.utils;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.erquiaga.breeder.utils.BreederConstants.*;
+import static com.erquiaga.organism.utils.BreederConstants.*;
 
 public class BreederUtils {
 

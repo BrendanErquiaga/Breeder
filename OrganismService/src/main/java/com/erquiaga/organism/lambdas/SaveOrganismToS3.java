@@ -1,4 +1,4 @@
-package com.erquiaga.breeder.lambdas;
+package com.erquiaga.organism.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -6,16 +6,16 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.erquiaga.breeder.models.Organism;
+import com.erquiaga.organism.models.Organism;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import static com.erquiaga.breeder.utils.BreederConstants.BREEDER_S3_BUCKET;
-import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_FILE_SUFFIX;
-import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_FOLDER;
+import static com.erquiaga.organism.utils.BreederConstants.BREEDER_S3_BUCKET;
+import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_FILE_SUFFIX;
+import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_FOLDER;
 
 public class SaveOrganismToS3 {
 

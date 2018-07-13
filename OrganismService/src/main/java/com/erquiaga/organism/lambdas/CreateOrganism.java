@@ -1,18 +1,16 @@
-package com.erquiaga.breeder.lambdas;
+package com.erquiaga.organism.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
-import com.amazonaws.services.stepfunctions.AWSStepFunctionsAsyncClient;
-import com.amazonaws.services.stepfunctions.AWSStepFunctionsAsyncClientBuilder;
 import com.amazonaws.services.stepfunctions.AWSStepFunctionsClient;
 import com.amazonaws.services.stepfunctions.AWSStepFunctionsClientBuilder;
 import com.amazonaws.services.stepfunctions.model.StartExecutionRequest;
 import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
-import com.erquiaga.breeder.models.Organism;
+import com.erquiaga.organism.models.Organism;
 import com.google.gson.Gson;
 
-import static com.erquiaga.breeder.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_ARN;
-import static com.erquiaga.breeder.utils.BreederUtils.getNextOrganismId;
+import static com.erquiaga.organism.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_ARN;
+import static com.erquiaga.organism.utils.BreederUtils.getNextOrganismId;
 
 public class CreateOrganism {
 

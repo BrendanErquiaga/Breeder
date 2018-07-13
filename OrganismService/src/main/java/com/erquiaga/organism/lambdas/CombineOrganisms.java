@@ -1,17 +1,17 @@
-package com.erquiaga.breeder.lambdas;
+package com.erquiaga.organism.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
-import com.erquiaga.breeder.models.Organism;
+import com.erquiaga.organism.models.Organism;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.util.Random;
 
-import static com.erquiaga.breeder.utils.BreederConstants.*;
-import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
-import static com.erquiaga.breeder.utils.DNACombiner.getOrganismDNA;
+import static com.erquiaga.organism.utils.BreederConstants.*;
+import static com.erquiaga.organism.utils.BreederUtils.getParmeterIfExists;
+import static com.erquiaga.organism.utils.DNACombiner.getOrganismDNA;
 
 public class CombineOrganisms {
     JSONParser parser = new JSONParser();

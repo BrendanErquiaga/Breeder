@@ -1,4 +1,4 @@
-package com.erquiaga.breeder.lambdas;
+package com.erquiaga.organism.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static com.erquiaga.breeder.utils.BreederConstants.*;
-import static com.erquiaga.breeder.utils.BreederUtils.getNextOrganismId;
-import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
+import static com.erquiaga.organism.utils.BreederConstants.*;
+import static com.erquiaga.organism.utils.BreederUtils.getNextOrganismId;
+import static com.erquiaga.organism.utils.BreederUtils.getParmeterIfExists;
 
 public class BreedOrganisms extends ApiGatewayProxyLambda {
 

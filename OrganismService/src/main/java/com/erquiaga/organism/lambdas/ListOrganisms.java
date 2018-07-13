@@ -1,4 +1,4 @@
-package com.erquiaga.breeder.lambdas;
+package com.erquiaga.organism.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static com.erquiaga.breeder.utils.BreederConstants.BREEDER_S3_BUCKET;
-import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_FOLDER;
-import static com.erquiaga.breeder.utils.BreederConstants.ORGANISM_TYPE_KEY;
-import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
+import static com.erquiaga.organism.utils.BreederConstants.BREEDER_S3_BUCKET;
+import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_FOLDER;
+import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_TYPE_KEY;
+import static com.erquiaga.organism.utils.BreederUtils.getParmeterIfExists;
 
 public class ListOrganisms extends ApiGatewayProxyLambda {
 

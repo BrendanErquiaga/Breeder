@@ -1,12 +1,12 @@
-package com.erquiaga.breeder.utils;
+package com.erquiaga.organism.utils;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.Random;
 
-import static com.erquiaga.breeder.utils.BreederConstants.*;
-import static com.erquiaga.breeder.utils.BreederUtils.getParmeterIfExists;
+import static com.erquiaga.organism.utils.BreederConstants.*;
+import static com.erquiaga.organism.utils.BreederUtils.getParmeterIfExists;
 
 public class DNACombiner {
 
