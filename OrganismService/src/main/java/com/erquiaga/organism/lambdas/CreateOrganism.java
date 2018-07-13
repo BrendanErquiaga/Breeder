@@ -15,6 +15,7 @@ import static com.erquiaga.organism.utils.OrganismRequestUtils.getNextOrganismId
 public class CreateOrganism {
 
     //Handle POST under /organism
+    //TODO Refactor so this doesn't need a strict data model, just a schema to match
     public String createOrganismHandler(Organism organism, Context context) {
         LambdaLogger logger = context.getLogger();
         logger.log("Creating an organism");
