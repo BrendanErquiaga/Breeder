@@ -13,8 +13,8 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 
-import static com.erquiaga.organism.utils.BreederConstants.*;
-import static com.erquiaga.organism.utils.BreederUtils.*;
+import static com.erquiaga.organism.utils.OrganismConstants.*;
+import static com.erquiaga.organism.utils.OrganismRequestUtils.*;
 
 public class HandleOrganism extends ApiGatewayProxyLambda {
 

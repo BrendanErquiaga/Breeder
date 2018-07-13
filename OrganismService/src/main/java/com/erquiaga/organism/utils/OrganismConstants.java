@@ -1,6 +1,6 @@
 package com.erquiaga.organism.utils;
 
-public class BreederConstants {
+public class OrganismConstants {
 
     //Defaults
     public final static String DEFAULT_ORGANISM_TYPE = "organism";

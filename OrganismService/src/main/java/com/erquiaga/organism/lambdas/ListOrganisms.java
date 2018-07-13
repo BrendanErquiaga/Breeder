@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static com.erquiaga.organism.utils.BreederConstants.BREEDER_S3_BUCKET;
-import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_FOLDER;
-import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_TYPE_KEY;
-import static com.erquiaga.organism.utils.BreederUtils.getParmeterIfExists;
+import static com.erquiaga.organism.utils.OrganismConstants.BREEDER_S3_BUCKET;
+import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_FOLDER;
+import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_TYPE_KEY;
+import static com.erquiaga.organism.utils.OrganismRequestUtils.getParmeterIfExists;
 
 public class ListOrganisms extends ApiGatewayProxyLambda {
 

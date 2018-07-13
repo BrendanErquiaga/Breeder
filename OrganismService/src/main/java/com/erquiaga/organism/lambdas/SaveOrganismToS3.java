@@ -13,9 +13,9 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import static com.erquiaga.organism.utils.BreederConstants.BREEDER_S3_BUCKET;
-import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_FILE_SUFFIX;
-import static com.erquiaga.organism.utils.BreederConstants.ORGANISM_FOLDER;
+import static com.erquiaga.organism.utils.OrganismConstants.BREEDER_S3_BUCKET;
+import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_FILE_SUFFIX;
+import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_FOLDER;
 
 public class SaveOrganismToS3 {
 

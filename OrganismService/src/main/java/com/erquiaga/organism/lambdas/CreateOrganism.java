@@ -9,8 +9,8 @@ import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import com.erquiaga.organism.models.Organism;
 import com.google.gson.Gson;
 
-import static com.erquiaga.organism.utils.BreederConstants.SAVE_ORGANISM_STEP_FUNCTION_ARN;
-import static com.erquiaga.organism.utils.BreederUtils.getNextOrganismId;
+import static com.erquiaga.organism.utils.OrganismConstants.SAVE_ORGANISM_STEP_FUNCTION_ARN;
+import static com.erquiaga.organism.utils.OrganismRequestUtils.getNextOrganismId;
 
 public class CreateOrganism {
 

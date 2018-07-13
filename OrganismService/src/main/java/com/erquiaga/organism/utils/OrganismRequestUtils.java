@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.erquiaga.organism.utils.BreederConstants.*;
+import static com.erquiaga.organism.utils.OrganismConstants.*;
 
-public class BreederUtils {
+public class OrganismRequestUtils {
 
     public static String getParmeterIfExists(JSONObject jsonObject, String parameterKey, String defaultValue)
     {
