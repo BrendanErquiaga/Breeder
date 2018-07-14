@@ -4,6 +4,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.erquiaga.breeder.models.Organism;
 import com.erquiaga.breeder.utils.DNACombiner;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -17,34 +18,44 @@ import static com.erquiaga.breeder.utils.BreederRequestUtils.getParmeterIfExists
 public class CombineOrganisms {
     JSONParser parser = new JSONParser();
 
-    public Organism combineOrganisms(String breedingData, Context context) throws ParseException {
+    public Organism combineOrganisms(String breedingData, Context context) throws Exception {
         LambdaLogger logger = context.getLogger();
         logger.log("Combining Breeding Data");
 
-
         try {
-            JSONObject breedingDataJson = (JSONObject) parser.parse(breedingData);
-            JSONObject p1Data = (JSONObject) breedingDataJson.get(PARENT_ONE_DATA_KEY);
-            JSONObject p2Data = (JSONObject) breedingDataJson.get(PARENT_TWO_DATA_KEY);
+            logger.log("Breeding Data: " + breedingData);
 
-            String newOrganismId = getParmeterIfExists(breedingDataJson, CHILD_ORGANISM_ID_KEY,"");
+            JSONArray breedingObjects = (JSONArray) parser.parse(breedingData);
+            JSONObject breedingObject1 = (JSONObject) breedingObjects.get(0);
+            JSONObject breedingObject2 = (JSONObject) breedingObjects.get(1);
 
-            Organism newOrganism = new Organism();
-            newOrganism.setId(newOrganismId);
+            String newOrganismId = getParmeterIfExists(breedingObject1, CHILD_ORGANISM_ID_KEY,null);
 
-            setupOrganismDefaults(newOrganism, p1Data, p2Data);
+            if(newOrganismId != null && breedingObject1 != null && breedingObject2 != null) {
+                Organism newOrganism = new Organism();
+                newOrganism.setId(newOrganismId);
 
-            newOrganism.setDna(DNACombiner.getOrganismDNA(p1Data, p2Data));
+                JSONObject parentOrganismData1 = (JSONObject)breedingObject1.get(PARENT_DATA_KEY);
+                JSONObject parentOrganismData2 = (JSONObject)breedingObject2.get(PARENT_DATA_KEY);
 
-            return newOrganism;
+                setupOrganismDefaults(newOrganism, parentOrganismData1, parentOrganismData2);
+
+                newOrganism.setDna(DNACombiner.getOrganismDNA(parentOrganismData1, parentOrganismData2));
+
+                return newOrganism;
+            } else {
+                throw new Exception("Child Organism ID not found.");
+            }
         } catch (ParseException e) {
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
     }
 
     private void setupOrganismDefaults(Organism organism, JSONObject p1Data, JSONObject p2Data) {
-
         organism.setType(getParmeterIfExists(p1Data, ORGANISM_TYPE_KEY, DEFAULT_ORGANISM_TYPE));
         organism.setMetadata(getNewOrganismMetadata(p1Data, p2Data));
         organism.setBreedingRules((JSONObject)p1Data.get(BREEDING_RULES_KEY));
