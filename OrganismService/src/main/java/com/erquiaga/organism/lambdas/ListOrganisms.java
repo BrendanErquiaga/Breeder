@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static com.erquiaga.organism.utils.OrganismConstants.BREEDER_S3_BUCKET;
+import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_S3_BUCKET;
 import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_FOLDER;
 import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_TYPE_KEY;
 import static com.erquiaga.organism.utils.OrganismRequestUtils.getParmeterIfExists;
@@ -51,7 +51,7 @@ public class ListOrganisms extends ApiGatewayProxyLambda {
             }
 
             AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-            ObjectListing organisms = s3Client.listObjects(BREEDER_S3_BUCKET, listPrefix);
+            ObjectListing organisms = s3Client.listObjects(ORGANISM_S3_BUCKET, listPrefix);
 
             for(S3ObjectSummary organismObjectSummary : organisms.getObjectSummaries()) {
                 String organismKey = organismObjectSummary.getKey();

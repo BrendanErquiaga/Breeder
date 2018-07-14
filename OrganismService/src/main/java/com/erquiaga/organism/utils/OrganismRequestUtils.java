@@ -41,14 +41,14 @@ public class OrganismRequestUtils {
     public static S3Object getOrganismS3Object(String organismId) {
         AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
 
-        return s3Client.getObject(BREEDER_S3_BUCKET, getOrganismObjectKey(organismId));
+        return s3Client.getObject(ORGANISM_S3_BUCKET, getOrganismObjectKey(organismId));
     }
 
     public static boolean organismExists(String organismId) {
         String organismKey = ORGANISM_FOLDER + organismId + ORGANISM_FILE_SUFFIX;
         AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
 
-        return s3Client.doesObjectExist(BREEDER_S3_BUCKET, organismKey);
+        return s3Client.doesObjectExist(ORGANISM_S3_BUCKET, organismKey);
     }
 
     public static String getOrganismObjectKey(String organismId) {

@@ -87,7 +87,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
                 } else {
                     String organismKey = getOrganismObjectKey(organismId);
                     AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-                    s3Client.deleteObject(BREEDER_S3_BUCKET, organismKey);
+                    s3Client.deleteObject(ORGANISM_S3_BUCKET, organismKey);
                     AWSStepFunctionsClient awsStepFunctionsClient = (AWSStepFunctionsClient) AWSStepFunctionsClientBuilder.defaultClient();
 
                     StartExecutionRequest stepFunctionRequest = new StartExecutionRequest();
@@ -98,7 +98,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
 
                     logger.log(startExecutionResult.toString());
 
-                    String bodyMessage = "Updated Organism at this location - S3:" + BREEDER_S3_BUCKET + "/" + organismKey;
+                    String bodyMessage = "Updated Organism at this location - S3:" + ORGANISM_S3_BUCKET + "/" + organismKey;
 
                     responseJson.put("isBase64Encoded", false);
                     responseJson.put("statusCode", responseCode);
@@ -135,9 +135,9 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
             if(!"".equals(organismId) && organismExists(organismId)) {
                 String organismKey = getOrganismObjectKey(organismId);
                 AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-                s3Client.deleteObject(BREEDER_S3_BUCKET, organismKey);
+                s3Client.deleteObject(ORGANISM_S3_BUCKET, organismKey);
 
-                String bodyMessage = "Deleted Object at this location - S3:" + BREEDER_S3_BUCKET + "/" + organismKey;
+                String bodyMessage = "Deleted Object at this location - S3:" + ORGANISM_S3_BUCKET + "/" + organismKey;
 
                 responseJson.put("isBase64Encoded", false);
                 responseJson.put("statusCode", responseCode);

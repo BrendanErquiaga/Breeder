@@ -15,7 +15,7 @@ public class OrganismConstants {
     public final static String ORGANISM_JSON_MISSING_KEY_MESSAGE = "Organism JSON missing key: ";
 
     //AWS Keys
-    public final static String BREEDER_S3_BUCKET = "organism-collections";
+    public final static String ORGANISM_S3_BUCKET = "hazi-organism-collections";
     public final static String ORGANISM_FOLDER = "organisms/";
     public final static String ORGANISM_FILE_SUFFIX = ".json";
     public final static String SAVE_ORGANISM_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:SaveOrganism";

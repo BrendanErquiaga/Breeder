@@ -13,7 +13,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import static com.erquiaga.organism.utils.OrganismConstants.BREEDER_S3_BUCKET;
+import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_S3_BUCKET;
 import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_FILE_SUFFIX;
 import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_FOLDER;
 
@@ -34,7 +34,7 @@ public class SaveOrganismToS3 {
             metadata.setContentType("application/json");
 
             PutObjectRequest organismObjectRequest =
-                    new PutObjectRequest(BREEDER_S3_BUCKET, organismKey, inputStream, metadata);
+                    new PutObjectRequest(ORGANISM_S3_BUCKET, organismKey, inputStream, metadata);
 
             s3Client.putObject(organismObjectRequest);
         } catch (Exception e) {
