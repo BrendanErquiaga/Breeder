@@ -80,7 +80,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
             }
 
             if(!"".equals(organismId) && organismExists(organismId)) {
-                if(organismData == null || !isValidOrganismJson(organismData)) {
+                if(organismData == null || !isValidOrganismJson(organismData, logger)) {
                     responseJson.put("isBase64Encoded", false);
                     responseJson.put("statusCode", "404");
                     responseJson.put("body", "No Valid Organism Data Provided");

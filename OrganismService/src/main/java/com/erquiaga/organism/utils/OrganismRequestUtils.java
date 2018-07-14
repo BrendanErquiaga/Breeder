@@ -1,5 +1,6 @@
 package com.erquiaga.organism.utils;
 
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
@@ -54,29 +55,30 @@ public class OrganismRequestUtils {
         return ORGANISM_FOLDER + organismId + ORGANISM_FILE_SUFFIX;
     }
 
-    public static boolean isValidOrganismJson(JSONObject organismJson) {
+    //TODO: Rewrite JSON Validation
+    public static boolean isValidOrganismJson(JSONObject organismJson, LambdaLogger logger) {
         boolean isValid = true;
 
         if(!organismJson.containsKey(ORGANISM_ID_KEY)) {
-            //Probably log about it
+            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ ORGANISM_ID_KEY);
             isValid = false;
         } else if(!organismJson.containsKey(ORGANISM_TYPE_KEY)) {
-            //Probably log about it
+            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ ORGANISM_TYPE_KEY);
             isValid = false;
         } else if(!organismJson.containsKey(BREEDING_RULES_KEY)) {
-            //Probably log about it
+            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ BREEDING_RULES_KEY);
             isValid = false;
         } else if(!organismJson.containsKey(METADATA_KEY)) {
-            //Probably log about it
+            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ METADATA_KEY);
             isValid = false;
         } else if(!organismJson.containsKey(DNA_KEY)) {
-            //Probably log about it
+            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ DNA_KEY);
             isValid = false;
         } else if(!((JSONObject)organismJson.get(METADATA_KEY)).containsKey(ORGANISM_NAME_KEY)) {
-            //Probably log about it
+            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ ORGANISM_NAME_KEY);
             isValid = false;
         } else if(!((JSONObject)organismJson.get(DNA_KEY)).containsKey(CHROMOSOMES_KEY)) {
-            //Probably log about it
+            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ CHROMOSOMES_KEY);
             isValid = false;
         }
 
