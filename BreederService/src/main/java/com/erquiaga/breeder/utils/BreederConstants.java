@@ -26,8 +26,10 @@ public class BreederConstants {
     //Generated JSON Keys
     public final static String PARENT_ONE_ID_KEY = "parentOneId";
     public final static String PARENT_TWO_ID_KEY = "parentTwoId";
+    public final static String PARENT_ID_KEY = "parentID";
     public final static String PARENT_ONE_DATA_KEY = "parentOneData";
     public final static String PARENT_TWO_DATA_KEY = "parentTwoData";
+    public final static String PARENT_DATA_KEY = "parentData";
     public final static String CHILD_ORGANISM_ID_KEY = "childOrganismId";
 
     //AWS Keys
