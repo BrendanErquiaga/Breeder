@@ -41,7 +41,7 @@ public class GatherBreedingData {
 
         JSONObject breedingData = new JSONObject();
         try {
-            String parentDataString = getRequest(ORGANISM_API_HOST + ORGANISM_API_STAGE_DEV + ORGANISM_API_GET_ORGANISM_ENDPOINT + parentId);
+            String parentDataString = getRequest("http://" + ORGANISM_API_HOST + ORGANISM_API_STAGE_DEV + ORGANISM_API_GET_ORGANISM_ENDPOINT + parentId);
             JSONObject parentOrganism = (JSONObject) parser.parse(parentDataString);
 
             breedingData.put(PARENT_ID_KEY, parentId);
