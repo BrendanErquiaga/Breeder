@@ -37,7 +37,7 @@ public class BreederConstants {
     public final static String ORGANISM_FOLDER = "organisms/";
     public final static String ORGANISM_FILE_SUFFIX = ".json";
     public final static String SAVE_ORGANISM_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:SaveOrganism";
-    public final static String BREED_ORGANISMS_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:BreedOrganism";
+    public final static String BREED_ORGANISMS_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:BreedOrganisms";
 
     //Organism Seed Constants
     public final static int NEW_ORGANISM_MAX_NAME_LENGTH = 10;
