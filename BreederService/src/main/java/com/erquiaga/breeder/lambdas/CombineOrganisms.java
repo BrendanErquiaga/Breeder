@@ -18,16 +18,13 @@ import static com.erquiaga.breeder.utils.BreederRequestUtils.getParmeterIfExists
 public class CombineOrganisms {
     JSONParser parser = new JSONParser();
 
-    public Organism combineOrganisms(String breedingData, Context context) throws Exception {
+    public Organism combineOrganisms(String[] breedingData, Context context) throws Exception {
         LambdaLogger logger = context.getLogger();
         logger.log("Combining Breeding Data");
 
         try {
-            logger.log("Breeding Data: " + breedingData);
-
-            JSONArray breedingObjects = (JSONArray) parser.parse(breedingData);
-            JSONObject breedingObject1 = (JSONObject) breedingObjects.get(0);
-            JSONObject breedingObject2 = (JSONObject) breedingObjects.get(1);
+            JSONObject breedingObject1 = (JSONObject) parser.parse(breedingData[0]);
+            JSONObject breedingObject2 = (JSONObject) parser.parse(breedingData[1]);
 
             String newOrganismId = getParmeterIfExists(breedingObject1, CHILD_ORGANISM_ID_KEY,null);
 
