@@ -38,7 +38,9 @@ public class BreederConstants {
     public final static int NEW_ORGANISM_MIN_NAME_LENGTH = 3;
 
     //API Constants
+    public final static String ORGANISM_API_HTTP_PROTOCOL= "https://";
     public final static String ORGANISM_API_HOST = "du1ejfbfoe.execute-api.us-west-2.amazonaws.com";
     public final static String ORGANISM_API_STAGE_DEV = "/DEV/";
-    public final static String ORGANISM_API_GET_ORGANISM_ENDPOINT = "/organism/";
+    public final static String ORGANIAM_API_ENDPOINT = "/organism/";
+    public final static String ORGANISM_CONSTRUCTED_ENDPOINT_DEV = ORGANISM_API_HTTP_PROTOCOL + ORGANISM_API_HOST + ORGANISM_API_STAGE_DEV + ORGANIAM_API_ENDPOINT;
 }

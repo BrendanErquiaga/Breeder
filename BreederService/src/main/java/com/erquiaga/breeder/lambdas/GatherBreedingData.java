@@ -2,20 +2,15 @@ package com.erquiaga.breeder.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpResponse;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import static com.erquiaga.breeder.utils.BreederConstants.*;
 import static com.erquiaga.breeder.utils.BreederRequestUtils.getParmeterIfExists;
+import static com.erquiaga.breeder.utils.BreederRequestUtils.getRequest;
 
 public class GatherBreedingData {
     JSONParser parser = new JSONParser();
@@ -40,7 +35,7 @@ public class GatherBreedingData {
 
         JSONObject breedingData = new JSONObject();
         try {
-            String parentDataString = getRequest("https://" + ORGANISM_API_HOST + ORGANISM_API_STAGE_DEV + ORGANISM_API_GET_ORGANISM_ENDPOINT + parentId);
+            String parentDataString = getRequest(ORGANISM_CONSTRUCTED_ENDPOINT_DEV + parentId);
             JSONObject parentOrganism = (JSONObject) parser.parse(parentDataString);
 
             breedingData.put(PARENT_ID_KEY, parentId);
@@ -54,14 +49,5 @@ public class GatherBreedingData {
         return breedingData.toJSONString();
     }
 
-    static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
-    public String getRequest(String reqUrl) throws IOException {
-        GenericUrl url = new GenericUrl(reqUrl);
-        HttpRequest request = HTTP_TRANSPORT.createRequestFactory().buildGetRequest(url);
-        HttpResponse response = request.execute();
-        System.out.println(response.getStatusCode());
-
-        return request.execute().parseAsString();
-    }
 }

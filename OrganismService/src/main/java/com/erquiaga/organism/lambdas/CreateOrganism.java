@@ -20,7 +20,9 @@ public class CreateOrganism {
         LambdaLogger logger = context.getLogger();
         logger.log("Creating an organism");
 
-        organism.setId(getNextOrganismId());
+        if(organism.getId() == null) {
+            organism.setId(getNextOrganismId());
+        }
         Gson gson = new Gson();
         String organismJsonString = gson.toJson(organism);
 
