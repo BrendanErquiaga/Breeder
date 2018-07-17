@@ -27,15 +27,10 @@ public class BreederConstants {
     public final static String PARENT_ONE_ID_KEY = "parentOneId";
     public final static String PARENT_TWO_ID_KEY = "parentTwoId";
     public final static String PARENT_ID_KEY = "parentID";
-    public final static String PARENT_ONE_DATA_KEY = "parentOneData";
-    public final static String PARENT_TWO_DATA_KEY = "parentTwoData";
     public final static String PARENT_DATA_KEY = "parentData";
     public final static String CHILD_ORGANISM_ID_KEY = "childOrganismId";
 
     //AWS Keys
-    public final static String BREEDER_S3_BUCKET = "hazi-organism-collections";
-    public final static String ORGANISM_FOLDER = "organisms/";
-    public final static String ORGANISM_FILE_SUFFIX = ".json";
     public final static String BREED_ORGANISMS_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:BreedOrganisms";
 
     //Organism Seed Constants
