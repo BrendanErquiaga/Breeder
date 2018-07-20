@@ -8,6 +8,9 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_OK;
+
 public class ApiGatewayProxyLambda implements RequestStreamHandler {
     JSONParser parser = new JSONParser();
 
@@ -40,13 +43,13 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
                     responseJson = handlePutRequest(jsonEventObject, context);
                     break;
                 default:
-                    responseJson.put("statusCode", "400");
+                    responseJson.put("statusCode", SC_BAD_REQUEST);
                     responseJson.put("message", "This method is not supported");
                     break;
             }
         } catch (Exception e) {
             logger.log("Exception: " + e.toString());
-            responseJson.put("statusCode", "400");
+            responseJson.put("statusCode", SC_BAD_REQUEST);
             responseJson.put("exception", e);
         }
 
@@ -60,7 +63,7 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
         JSONObject responseJson = new JSONObject();
         JSONObject responseBody = new JSONObject();
         responseBody.put("message", "This is a get...");
-        responseJson.put("statusCode", 200);
+        responseJson.put("statusCode", SC_OK);
         responseJson.put("body", responseBody.toString());
 
         return responseJson;
@@ -71,7 +74,7 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
         JSONObject responseJson = new JSONObject();
         JSONObject responseBody = new JSONObject();
         responseBody.put("message", "This is a put...");
-        responseJson.put("statusCode", 200);
+        responseJson.put("statusCode", SC_OK);
         responseJson.put("body", responseBody.toString());
 
         return responseJson;
@@ -82,7 +85,7 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
         JSONObject responseJson = new JSONObject();
         JSONObject responseBody = new JSONObject();
         responseBody.put("message", "This is a delete...");
-        responseJson.put("statusCode", 200);
+        responseJson.put("statusCode", SC_OK);
         responseJson.put("body", responseBody.toString());
 
         return responseJson;
@@ -93,7 +96,7 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
         JSONObject responseJson = new JSONObject();
         JSONObject responseBody = new JSONObject();
         responseBody.put("message", "This is a post...");
-        responseJson.put("statusCode", 200);
+        responseJson.put("statusCode", SC_OK);
         responseJson.put("body", responseBody.toString());
 
         return responseJson;

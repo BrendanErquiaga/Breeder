@@ -15,6 +15,8 @@ import java.io.OutputStream;
 import static com.erquiaga.breeder.utils.BreederConstants.*;
 import static com.erquiaga.breeder.utils.BreederRequestUtils.getNextOrganismId;
 import static com.erquiaga.breeder.utils.BreederRequestUtils.getParmeterIfExists;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_OK;
 
 public class BreedOrganisms extends ApiGatewayProxyLambda {
 
@@ -31,48 +33,61 @@ public class BreedOrganisms extends ApiGatewayProxyLambda {
         logger.log("Handling POST request");
 
         JSONObject responseJson = new JSONObject();
-        String responseCode = "200";
-
-        String parentOneId = "-1";
-        String parentTwoId = "-1";
-        //String organismType = "-";
 
         try {
             if (jsonEventObject.get("queryStringParameters") != null) {
                 JSONObject queryStringParameters = (JSONObject)jsonEventObject.get("queryStringParameters");
 
-                parentOneId = getParmeterIfExists(queryStringParameters, PARENT_ONE_ID_KEY,"-1");
-                parentTwoId = getParmeterIfExists(queryStringParameters, PARENT_TWO_ID_KEY, "-1");
-                //organismType = getParmeterIfExists(queryStringParameters, ORGANISM_TYPE_KEY, "-");
-            }
+                String parentOneId = getParmeterIfExists(queryStringParameters, PARENT_ONE_ID_KEY,"-1");
+                String parentTwoId = getParmeterIfExists(queryStringParameters, PARENT_TWO_ID_KEY, "-1");
+                String childCountString = getParmeterIfExists(queryStringParameters, CHILD_COUNT_KEY, "1");
 
-            String breedingMessage = "";
-            String newChildOrganismId = "";
+                String breedingMessage = "";
+                StringBuilder sb = new StringBuilder();
+                sb.append("Breeding should produce children with these IDs [");
+                int childCount = Integer.parseInt(childCountString);
 
-            if(parentOneId != "-1" && parentTwoId != "-1") {
-                newChildOrganismId = getNextOrganismId();//TODO Change this so Breeder Service calls Organism Service (or something similar)
-                breedingMessage = "Attempting to create new organism with this formula - " +
-                        "P1: " + parentOneId + " + P2: " + parentTwoId + " = " + newChildOrganismId;
-                responseJson.put("statusCode", responseCode);
+                if(parentOneId != "-1" && parentTwoId != "-1" && childCount > 0) {
+                    logger.log("Should be breeding this many children: " + childCount);
+                    String[] childIDs = new String[childCount];
 
-                String kickOffResponse = kickOffBreedingProcessStepFunction(parentOneId, parentTwoId, newChildOrganismId);
-                logger.log(kickOffResponse);
+                    for(int i = 0; i < childCount; i++) {
+                        childIDs[i] = breedOrganisms(parentOneId, parentTwoId, logger);
+                        sb.append(childIDs[i]).append(',');
+                    }
+
+                    sb.append(']');
+
+                    breedingMessage = sb.toString();
+                    responseJson.put("statusCode", SC_OK);
+                } else {
+                    breedingMessage = "One parentID missing, cannot breed.";
+                    responseJson.put("statusCode", SC_BAD_REQUEST);
+                }
+
+                JSONObject responseBody = new JSONObject();
+                responseBody.put("message", breedingMessage);
+                responseJson.put("body", responseBody.toString());
             } else {
-                breedingMessage = "One parentID missing, cannot breed.";
-                responseJson.put("statusCode", "400");
+                throw new Exception("Missing query params.");
             }
-
-            JSONObject responseBody = new JSONObject();
-            responseBody.put("message", breedingMessage);
-            responseJson.put("isBase64Encoded", false);
-            responseJson.put("body", responseBody.toString());
         } catch (Exception e) {
             logger.log("Exception: " + e.toString());
-            responseJson.put("statusCode", "400");
+            responseJson.put("statusCode", SC_BAD_REQUEST);
             responseJson.put("exception", e);
         }
 
         return responseJson;
+    }
+
+    private String breedOrganisms(String parentOneId, String parentTwoId, LambdaLogger logger) {
+        String newChildId = getNextOrganismId();//TODO Change this so Breeder Service calls Organism Service (or something similar)
+        logger.log("Kicking off breeding for this new organism: " + newChildId);
+
+        String kickOffResponse = kickOffBreedingProcessStepFunction(parentOneId, parentTwoId, newChildId);
+        logger.log(kickOffResponse);
+
+        return newChildId;
     }
 
     private String kickOffBreedingProcessStepFunction(String parentOneId, String parentTwoId, String childId) {

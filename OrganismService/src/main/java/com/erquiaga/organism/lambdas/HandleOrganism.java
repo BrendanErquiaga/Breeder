@@ -15,6 +15,9 @@ import java.io.*;
 
 import static com.erquiaga.organism.utils.OrganismConstants.*;
 import static com.erquiaga.organism.utils.OrganismRequestUtils.*;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_OK;
 
 public class HandleOrganism extends ApiGatewayProxyLambda {
 
@@ -30,7 +33,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
         logger.log("Getting Organism");
 
         JSONObject responseJson = new JSONObject();
-        String responseCode = "200";
+        int responseCode = SC_OK;
         String organismId = "";
         try {
             if (jsonEventObject.get("pathParameters") != null) {
@@ -46,12 +49,12 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
                 responseJson.put("body", organismJson.toString());
             } else {
                 responseJson.put("isBase64Encoded", false);
-                responseJson.put("statusCode", "404");
+                responseJson.put("statusCode", SC_NOT_FOUND);
                 responseJson.put("body", "Organism not found!");
             }
         } catch (Exception e) {
             logger.log("Exception: " + e.toString());
-            responseJson.put("statusCode", "400");
+            responseJson.put("statusCode", SC_BAD_REQUEST);
             responseJson.put("exception", e);
         }
 
@@ -65,7 +68,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
 
         JSONObject responseJson = new JSONObject();
         JSONParser parser = new JSONParser();
-        String responseCode = "200";
+        int responseCode = SC_OK;
         String organismId = "";
         try {
             if (jsonEventObject.get("pathParameters") != null) {
@@ -82,7 +85,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
             if(!"".equals(organismId) && organismExists(organismId)) {
                 if(organismData == null || !isValidOrganismJson(organismData, logger)) {
                     responseJson.put("isBase64Encoded", false);
-                    responseJson.put("statusCode", "404");
+                    responseJson.put("statusCode", SC_NOT_FOUND);
                     responseJson.put("body", "No Valid Organism Data Provided");
                 } else {
                     String organismKey = getOrganismObjectKey(organismId);
@@ -106,12 +109,12 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
                 }
             } else {
                 responseJson.put("isBase64Encoded", false);
-                responseJson.put("statusCode", "404");
+                responseJson.put("statusCode", SC_NOT_FOUND);
                 responseJson.put("body", "Organism not found!");
             }
         } catch (Exception e) {
             logger.log("Exception: " + e.toString());
-            responseJson.put("statusCode", "400");
+            responseJson.put("statusCode", SC_BAD_REQUEST);
             responseJson.put("exception", e);
         }
 
@@ -124,7 +127,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
         logger.log("Deleting Organism");
 
         JSONObject responseJson = new JSONObject();
-        String responseCode = "200";
+        int responseCode = SC_OK;
         String organismId = "";
         try {
             if (jsonEventObject.get("pathParameters") != null) {
@@ -144,12 +147,12 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
                 responseJson.put("body", bodyMessage);
             } else {
                 responseJson.put("isBase64Encoded", false);
-                responseJson.put("statusCode", "404");
+                responseJson.put("statusCode", SC_NOT_FOUND);
                 responseJson.put("body", "Organism not found!");
             }
         } catch (Exception e) {
             logger.log("Exception: " + e.toString());
-            responseJson.put("statusCode", "400");
+            responseJson.put("statusCode", SC_BAD_REQUEST);
             responseJson.put("exception", e);
         }
 
@@ -161,7 +164,7 @@ public class HandleOrganism extends ApiGatewayProxyLambda {
         JSONObject responseJson = new JSONObject();
         JSONObject responseBody = new JSONObject();
         responseBody.put("message", "This method isn't supported");
-        responseJson.put("statusCode", 200);
+        responseJson.put("statusCode", SC_OK);
         responseJson.put("body", responseBody.toString());
 
         return responseJson;

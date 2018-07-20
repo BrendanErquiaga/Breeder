@@ -6,7 +6,7 @@ public class BreederConstants {
     public final static String DEFAULT_ORGANISM_TYPE = "organism";
 
 
-    //JSON Keys
+    //Organism JSON Keys
     public final static String ORGANISM_TYPE_KEY = "type";
     public final static String ORGANISM_ID_KEY = "id";
     public final static String METADATA_KEY = "metadata";
@@ -23,12 +23,13 @@ public class BreederConstants {
     public final static String GENE_EXPRESSION_VALUE_KEY = "expressionValue";
     public final static String GENE_COMBINATION_VALUE_KEY = "combinationValue";
 
-    //Generated JSON Keys
+    //Request Keys
     public final static String PARENT_ONE_ID_KEY = "parentOneId";
     public final static String PARENT_TWO_ID_KEY = "parentTwoId";
     public final static String PARENT_ID_KEY = "parentID";
     public final static String PARENT_DATA_KEY = "parentData";
     public final static String CHILD_ORGANISM_ID_KEY = "childOrganismId";
+    public final static String CHILD_COUNT_KEY = "childCount";
 
     //AWS Keys
     public final static String BREED_ORGANISMS_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:BreedOrganisms";

@@ -17,6 +17,8 @@ import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_S3_BUCKET;
 import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_FOLDER;
 import static com.erquiaga.organism.utils.OrganismConstants.ORGANISM_TYPE_KEY;
 import static com.erquiaga.organism.utils.OrganismRequestUtils.getParmeterIfExists;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_OK;
 
 public class ListOrganisms extends ApiGatewayProxyLambda {
 
@@ -32,7 +34,7 @@ public class ListOrganisms extends ApiGatewayProxyLambda {
         LambdaLogger logger = context.getLogger();
         logger.log("Handling GET request");
         JSONObject responseJson = new JSONObject();
-        String responseCode = "200";
+        int responseCode = SC_OK;
         String organismType = "";
 
         try {
@@ -70,7 +72,7 @@ public class ListOrganisms extends ApiGatewayProxyLambda {
 
         } catch (Exception e) {
             logger.log("Exception: " + e.toString());
-            responseJson.put("statusCode", "400");
+            responseJson.put("statusCode", SC_BAD_REQUEST);
             responseJson.put("exception", e);
         }
 
