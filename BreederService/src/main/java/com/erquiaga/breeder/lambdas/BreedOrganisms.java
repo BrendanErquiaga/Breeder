@@ -59,6 +59,7 @@ public class BreedOrganisms extends ApiGatewayProxyLambda {
                     sb.append(']');
 
                     breedingMessage = sb.toString();
+                    logger.log(breedingMessage);
                     responseJson.put("statusCode", SC_OK);
                 } else {
                     breedingMessage = "One parentID missing, cannot breed.";
@@ -68,6 +69,7 @@ public class BreedOrganisms extends ApiGatewayProxyLambda {
                 JSONObject responseBody = new JSONObject();
                 responseBody.put("message", breedingMessage);
                 responseJson.put("body", responseBody.toString());
+                logger.log("Should be done with request.");
             } else {
                 throw new Exception("Missing query params.");
             }
