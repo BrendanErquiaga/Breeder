@@ -19,23 +19,9 @@ public class CreateGenepool {
         LambdaLogger logger = context.getLogger();
         logger.log("Creating a Genepool");
 
-        genepool = new Genepool();
-
         if(genepool.getId() == null) {
             genepool.setId(getNextGenepoolId());
         }
-
-        genepool.setId(getNextGenepoolId());
-        genepool.addOrganismToGenepool("1");
-        genepool.addOrganismToGenepool("2");
-        genepool.addOrganismToGenepool("3");
-        genepool.addOrganismToGenepool("4");
-        genepool.addOrganismToGenepool("5");
-        genepool.addOrganismToGenepool("6");
-        genepool.addOrganismToGenepool("7");
-        genepool.addOrganismToGenepool("8");
-        genepool.addOrganismToGenepool("9");
-        genepool.addOrganismToGenepool("0");
 
         kickOffSaveGenepoolStepFunction(genepool, logger);
 

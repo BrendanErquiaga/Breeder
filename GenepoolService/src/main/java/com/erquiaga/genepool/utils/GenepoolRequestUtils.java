@@ -4,6 +4,8 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
+import com.erquiaga.genepool.models.Genepool;
+import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -58,6 +60,17 @@ public class GenepoolRequestUtils {
         AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
 
         return s3Client.getObject(GENEPOOL_S3_BUCKET, getGenepoolObjectKey(genepoolId));
+    }
+
+    public static Genepool getGenepoolIfExists(String genepoolId, LambdaLogger logger) throws IOException, ParseException {
+        if(genepoolExists(genepoolId)) {
+            JSONObject genepoolJson = getGenepoolJson(genepoolId);
+            Gson genepoolGson = new Gson();
+
+            return genepoolGson.fromJson(genepoolJson.toJSONString(), Genepool.class);
+        }
+
+        return null;
     }
     
     public static boolean isValidGenepoolJson(JSONObject genepoolJson, LambdaLogger logger) {

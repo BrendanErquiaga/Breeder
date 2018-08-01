@@ -5,7 +5,6 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.erquiaga.genepool.models.Genepool;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +12,8 @@ import java.io.OutputStream;
 
 import static com.erquiaga.genepool.lambdas.CreateGenepool.kickOffSaveGenepoolStepFunction;
 import static com.erquiaga.genepool.utils.GenepoolConstants.*;
-import static com.erquiaga.genepool.utils.GenepoolRequestUtils.*;
+import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getGenepoolIfExists;
+import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getPathParameter;
 import static org.apache.http.HttpStatus.*;
 
 public class HandleModifyGenepool extends ApiGatewayProxyLambda {
@@ -63,16 +63,7 @@ public class HandleModifyGenepool extends ApiGatewayProxyLambda {
         return responseJson;
     }
 
-    private Genepool getGenepoolIfExists(String genepoolId, LambdaLogger logger) throws IOException, ParseException {
-        if(genepoolExists(genepoolId)) {
-            JSONObject genepoolJson = getGenepoolJson(genepoolId);
-            Gson genepoolGson = new Gson();
 
-            return genepoolGson.fromJson(genepoolJson.toJSONString(), Genepool.class);
-        }
-
-        return null;
-    }
 
     @Override
     protected JSONObject handleDeleteRequest(JSONObject jsonEventObject, Context context) {
