@@ -1,5 +1,6 @@
 package com.erquiaga.genepool.utils;
 
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
@@ -11,9 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_FILE_SUFFIX;
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_FOLDER;
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_S3_BUCKET;
+import static com.erquiaga.genepool.utils.GenepoolConstants.*;
 
 public class GenepoolRequestUtils {
 
@@ -54,5 +53,19 @@ public class GenepoolRequestUtils {
         AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
 
         return s3Client.getObject(GENEPOOL_S3_BUCKET, getGenepoolObjectKey(genepoolId));
+    }
+    
+    public static boolean isValidGenepoolJson(JSONObject genepoolJson, LambdaLogger logger) {
+        boolean isValid = true;
+
+        if(!genepoolJson.containsKey(GENEPOOL_ID_KEY)) {
+            logger.log(OGENEPOOL_JSON_MISSING_KEY_MESSAGE + GENEPOOL_ID_KEY);
+            isValid = false;
+        } else if(!genepoolJson.containsKey(ORGANISMS_IN_GENEPOOL_KEY)) {
+            logger.log(OGENEPOOL_JSON_MISSING_KEY_MESSAGE + ORGANISMS_IN_GENEPOOL_KEY);
+            isValid = false;
+        }
+
+        return isValid;
     }
 }

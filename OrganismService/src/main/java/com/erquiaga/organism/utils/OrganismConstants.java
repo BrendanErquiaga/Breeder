@@ -11,7 +11,7 @@ public class OrganismConstants {
     public final static String DNA_KEY = "dna";
     public final static String CHROMOSOMES_KEY = "chromosomes";
 
-    //Loggins
+    //Logging
     public final static String ORGANISM_JSON_MISSING_KEY_MESSAGE = "Organism JSON missing key: ";
 
     //AWS Keys
