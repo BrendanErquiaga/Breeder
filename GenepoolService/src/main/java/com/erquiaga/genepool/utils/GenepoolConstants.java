@@ -2,10 +2,15 @@ package com.erquiaga.genepool.utils;
 
 public class GenepoolConstants {
     public final static String GENEPOOL_ID_KEY = "id";
+    public final static String ORGANISM_ID_PATH_PARAM_KEY = "organism-id";
     public final static String ORGANISMS_IN_GENEPOOL_KEY = "organismsInGenepool";
 
     //Logging
-    public final static String OGENEPOOL_JSON_MISSING_KEY_MESSAGE = "Genepool JSON missing key: ";
+    public final static String GENEPOOL_JSON_MISSING_KEY_MESSAGE = "Genepool JSON missing key: ";
+
+    //Event Keys
+
+    public final static String EVENT_PATH_PARAMETERS_KEY = "pathParameters";
 
     //AWS Keys
     public final static String GENEPOOL_S3_BUCKET = "hazi-organism-collections";

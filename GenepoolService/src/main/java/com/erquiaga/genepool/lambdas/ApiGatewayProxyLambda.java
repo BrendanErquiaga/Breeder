@@ -53,6 +53,8 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
             responseJson.put("exception", e);
         }
 
+
+        responseJson.put("isBase64Encoded", false);
         OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
         writer.write(responseJson.toJSONString());
         writer.close();

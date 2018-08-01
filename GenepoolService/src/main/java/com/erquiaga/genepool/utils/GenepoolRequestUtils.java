@@ -16,6 +16,11 @@ import static com.erquiaga.genepool.utils.GenepoolConstants.*;
 
 public class GenepoolRequestUtils {
 
+    public static String getPathParameter(JSONObject eventObject, String pathParameterKey) {
+        JSONObject pathParameters = (JSONObject)eventObject.get(EVENT_PATH_PARAMETERS_KEY);
+        return getParmeterIfExists(pathParameters, pathParameterKey, "");
+    }
+
     public static String getParmeterIfExists(JSONObject jsonObject, String parameterKey, String defaultValue)
     {
         if (jsonObject.get(parameterKey) != null) {
@@ -59,10 +64,10 @@ public class GenepoolRequestUtils {
         boolean isValid = true;
 
         if(!genepoolJson.containsKey(GENEPOOL_ID_KEY)) {
-            logger.log(OGENEPOOL_JSON_MISSING_KEY_MESSAGE + GENEPOOL_ID_KEY);
+            logger.log(GENEPOOL_JSON_MISSING_KEY_MESSAGE + GENEPOOL_ID_KEY);
             isValid = false;
         } else if(!genepoolJson.containsKey(ORGANISMS_IN_GENEPOOL_KEY)) {
-            logger.log(OGENEPOOL_JSON_MISSING_KEY_MESSAGE + ORGANISMS_IN_GENEPOOL_KEY);
+            logger.log(GENEPOOL_JSON_MISSING_KEY_MESSAGE + ORGANISMS_IN_GENEPOOL_KEY);
             isValid = false;
         }
 

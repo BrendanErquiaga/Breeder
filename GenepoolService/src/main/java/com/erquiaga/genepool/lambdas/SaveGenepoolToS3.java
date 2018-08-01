@@ -13,9 +13,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_FILE_SUFFIX;
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_FOLDER;
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_S3_BUCKET;
+import static com.erquiaga.genepool.utils.GenepoolConstants.*;
 
 public class SaveGenepoolToS3 {
     public void saveGenepool(Genepool genepool, Context context) {

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Genepool {
     public String id;
-    public List<OrganismGenepoolSpotIdentifier> organismsInGenepool;
+    public List<String> organismsInGenepool;
 
     public String getId() {
         return id;
@@ -15,11 +15,11 @@ public class Genepool {
         this.id = id;
     }
 
-    public List<OrganismGenepoolSpotIdentifier> getOrganismsInGenepool() {
+    public List<String> getOrganismsInGenepool() {
         return organismsInGenepool;
     }
 
-    public void setOrganismsInGenepool(List<OrganismGenepoolSpotIdentifier> organismsInGenepool) {
+    public void setOrganismsInGenepool(List<String> organismsInGenepool) {
         this.organismsInGenepool = organismsInGenepool;
     }
 
@@ -31,14 +31,14 @@ public class Genepool {
         this.organismsInGenepool = new ArrayList<>();
     }
 
-    public Genepool(String id, List<OrganismGenepoolSpotIdentifier> organismsInGenepool) {
+    public Genepool(String id, List<String> organismsInGenepool) {
         this.id = id;
         this.organismsInGenepool = organismsInGenepool;
     }
 
     public boolean addOrganismToGenepool(String organismId) {
         if(!organismIsInGenepool(organismId)) {
-            organismsInGenepool.add(new OrganismGenepoolSpotIdentifier(organismId, genePoolSize()));
+            organismsInGenepool.add(organismId);
             return true;
         } else {
             return false;
@@ -47,7 +47,7 @@ public class Genepool {
 
     public boolean removeOrganismFromGenepool(String organismId) throws Exception {
         if(organismIsInGenepool(organismId)) {
-            organismsInGenepool.remove(getOrganismIdentifier(organismId));
+            organismsInGenepool.remove(organismId);
             return true;
         } else {
             return false;
@@ -55,36 +55,8 @@ public class Genepool {
     }
 
     public boolean organismIsInGenepool(String organismId) {
-        for(OrganismGenepoolSpotIdentifier organism : organismsInGenepool) {
-            if(organism.getOrganismId().equals(organismId)) {
-                return true;
-            }
-        }
-
-        return false;
+        return organismsInGenepool.contains(organismId);
     }
-
-    public int getOrganismPositionInGenepool(String organismId) throws Exception {
-        for(OrganismGenepoolSpotIdentifier organism : organismsInGenepool) {
-            if(organism.getOrganismId().equals(organismId)) {
-                return organism.getPositionInGenepool();
-            }
-        }
-
-        throw new Exception("Organism not in genepool");
-    }
-
-    public OrganismGenepoolSpotIdentifier getOrganismIdentifier(String organismId) throws Exception {
-        for(OrganismGenepoolSpotIdentifier organism : organismsInGenepool) {
-            if(organism.getOrganismId().equals(organismId)) {
-                return organism;
-            }
-        }
-
-        throw new Exception("Organism not in genepool");
-    }
-
-
 
     @Override
     public String toString() {

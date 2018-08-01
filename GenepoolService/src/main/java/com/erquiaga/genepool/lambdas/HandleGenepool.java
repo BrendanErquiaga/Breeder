@@ -15,13 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_ID_KEY;
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_S3_BUCKET;
-import static com.erquiaga.genepool.utils.GenepoolConstants.SAVE_GENEPOOL_STEP_FUNCTION_ARN;
+import static com.erquiaga.genepool.utils.GenepoolConstants.*;
 import static com.erquiaga.genepool.utils.GenepoolRequestUtils.*;
-import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
-import static org.apache.http.HttpStatus.SC_NOT_FOUND;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.*;
 
 public class HandleGenepool extends ApiGatewayProxyLambda {
 
