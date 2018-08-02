@@ -20,9 +20,7 @@ import java.util.Random;
 
 import static com.erquiaga.genepool.lambdas.CreateGenepool.kickOffSaveGenepoolStepFunction;
 import static com.erquiaga.genepool.utils.GenepoolConstants.*;
-import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getGenepoolIfExists;
-import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getNextGenepoolId;
-import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getPathParameter;
+import static com.erquiaga.genepool.utils.GenepoolRequestUtils.*;
 import static org.apache.http.HttpStatus.*;
 
 public class BreedGenepool extends ApiGatewayProxyLambda {
@@ -48,8 +46,6 @@ public class BreedGenepool extends ApiGatewayProxyLambda {
             }
 
             Genepool genepool = getGenepoolIfExists(genepoolId, logger);
-
-            //TODO: If Genepool.size > 100, do this asyncronously
 
             if(genepool != null) {
 
