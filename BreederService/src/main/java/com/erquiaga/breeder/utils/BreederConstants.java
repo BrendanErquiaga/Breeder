@@ -30,6 +30,7 @@ public class BreederConstants {
     public final static String PARENT_DATA_KEY = "parentData";
     public final static String CHILD_ORGANISM_ID_KEY = "childOrganismId";
     public final static String CHILD_COUNT_KEY = "childCount";
+    public final static String CHILD_ID_KEY = "childId";
 
     //AWS Keys
     public final static String BREED_ORGANISMS_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:BreedOrganisms";

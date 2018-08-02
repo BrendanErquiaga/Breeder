@@ -9,8 +9,14 @@ public class GenepoolConstants {
     public final static String GENEPOOL_JSON_MISSING_KEY_MESSAGE = "Genepool JSON missing key: ";
 
     //Event Keys
-
     public final static String EVENT_PATH_PARAMETERS_KEY = "pathParameters";
+
+    //API Constants
+    public final static String BREEDER_API_HTTP_PROTOCOL = "https://";
+    public final static String BREEDER_API_HOST = "https://";
+    public final static String BREEDER_API_STAGE_DEV = "/DEV/";
+    public final static String BREEDER_API_ENDPOINT = "/DEV/";
+
 
     //AWS Keys
     public final static String GENEPOOL_S3_BUCKET = "hazi-organism-collections";

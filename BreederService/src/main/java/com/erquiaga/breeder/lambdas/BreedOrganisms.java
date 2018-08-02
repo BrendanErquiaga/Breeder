@@ -41,24 +41,20 @@ public class BreedOrganisms extends ApiGatewayProxyLambda {
                 String parentOneId = getParmeterIfExists(queryStringParameters, PARENT_ONE_ID_KEY,"-1");
                 String parentTwoId = getParmeterIfExists(queryStringParameters, PARENT_TWO_ID_KEY, "-1");
                 String childCountString = getParmeterIfExists(queryStringParameters, CHILD_COUNT_KEY, "1");
+                String childId = getParmeterIfExists(queryStringParameters, CHILD_ID_KEY, "-1");
 
                 String breedingMessage = "";
-                StringBuilder sb = new StringBuilder();
-                sb.append("Breeding should produce children with these IDs [");
+
                 int childCount = Integer.parseInt(childCountString);
 
-                if(parentOneId != "-1" && parentTwoId != "-1" && childCount > 0) {
-                    logger.log("Should be breeding this many children: " + childCount);
-                    String[] childIDs = new String[childCount];
+                if(parentOneId != "-1" && parentTwoId != "-1") {
 
-                    for(int i = 0; i < childCount; i++) {
-                        childIDs[i] = breedOrganisms(parentOneId, parentTwoId, logger);
-                        sb.append(childIDs[i]).append(',');
+                    if("-1".equals(childId)) {
+                        breedingMessage = breedMultipleChildren(parentOneId, parentTwoId, childCount, logger);
+                    } else {
+                        breedingMessage = "Breeding should produce one child with this id: " + breedOrganisms(parentOneId, parentTwoId, childId, logger);
                     }
 
-                    sb.append(']');
-
-                    breedingMessage = sb.toString();
                     logger.log(breedingMessage);
                     responseJson.put("statusCode", SC_OK);
                 } else {
@@ -82,8 +78,23 @@ public class BreedOrganisms extends ApiGatewayProxyLambda {
         return responseJson;
     }
 
-    private String breedOrganisms(String parentOneId, String parentTwoId, LambdaLogger logger) {
-        String newChildId = getNextOrganismId();//TODO Change this so Breeder Service calls Organism Service (or something similar)
+    private String breedMultipleChildren(String parentOneId, String parentTwoId, int childCount, LambdaLogger logger) {
+        StringBuilder breedingMessage = new StringBuilder();
+        breedingMessage.append("Breeding should produce children with these IDs [");
+        logger.log("Should be breeding this many children: " + childCount);
+        String[] childIDs = new String[childCount];
+
+        for(int i = 0; i < childCount; i++) {
+            childIDs[i] = breedOrganisms(parentOneId, parentTwoId, getNextOrganismId(), logger);
+            breedingMessage.append(childIDs[i]).append(',');
+        }
+
+        breedingMessage.append(']');
+
+        return breedingMessage.toString();
+    }
+
+    private String breedOrganisms(String parentOneId, String parentTwoId, String newChildId, LambdaLogger logger) {
         logger.log("Kicking off breeding for this new organism: " + newChildId);
 
         String kickOffResponse = kickOffBreedingProcessStepFunction(parentOneId, parentTwoId, newChildId);
