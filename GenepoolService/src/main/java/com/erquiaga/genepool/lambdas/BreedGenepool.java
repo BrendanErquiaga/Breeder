@@ -2,7 +2,12 @@ package com.erquiaga.genepool.lambdas;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsClient;
+import com.amazonaws.services.stepfunctions.AWSStepFunctionsClientBuilder;
+import com.amazonaws.services.stepfunctions.model.StartExecutionRequest;
+import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import com.erquiaga.genepool.models.Genepool;
+import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,9 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.erquiaga.genepool.utils.GenepoolConstants.EVENT_PATH_PARAMETERS_KEY;
-import static com.erquiaga.genepool.utils.GenepoolConstants.GENEPOOL_ID_KEY;
+import static com.erquiaga.genepool.lambdas.CreateGenepool.kickOffSaveGenepoolStepFunction;
+import static com.erquiaga.genepool.utils.GenepoolConstants.*;
 import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getGenepoolIfExists;
+import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getNextGenepoolId;
 import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getPathParameter;
 import static org.apache.http.HttpStatus.*;
 
@@ -43,11 +49,22 @@ public class BreedGenepool extends ApiGatewayProxyLambda {
 
             Genepool genepool = getGenepoolIfExists(genepoolId, logger);
 
-            if(genepool != null) {
-                JSONObject breedGenepoolJSON = breedGenepool(genepool, logger);
+            //TODO: If Genepool.size > 100, do this asyncronously
 
-                responseJson.put("statusCode", SC_OK);
-                responseJson.put("body", breedGenepoolJSON.toJSONString());
+            if(genepool != null) {
+
+                if(genepool.getOrganismsInGenepool().size() >= LARGE_GENEPOOL_SIZE) {
+                    StartExecutionResult startBreedLargeGenepoolResult = kickoffBreedLargeGenepoolStepFunction(genepool);
+                    logger.log(startBreedLargeGenepoolResult.toString());
+
+                    responseJson.put("statusCode", SC_CREATED);
+                    responseJson.put("body", "Genepool was very large, breeding has been started asyncronously, please check back later to see if it is complete.");
+                } else {
+                    JSONObject breedGenepoolJSON = breedGenepool(genepool, logger);
+
+                    responseJson.put("statusCode", SC_OK);
+                    responseJson.put("body", breedGenepoolJSON.toJSONString());
+                }
             } else {
                 responseJson.put("statusCode", SC_NOT_FOUND);
                 responseJson.put("body", "Genepool not found!");
@@ -61,15 +78,85 @@ public class BreedGenepool extends ApiGatewayProxyLambda {
         return responseJson;
     }
 
-    private JSONObject breedGenepool(Genepool genepool, LambdaLogger logger) {
+    public static JSONObject breedGenepool(Genepool genepool, LambdaLogger logger) {
         JSONObject breedGenepoolJSON = new JSONObject();
-        JSONArray breedingPairsJson = new JSONArray();
 
+        List<BreedingPair> breedingPairs = buildBreedingPairs(new ArrayList<>(genepool.getOrganismsInGenepool()));
+        JSONArray breedingPairsJson = kickoffBreedingPairs(breedingPairs, logger);
+        JSONArray newChildrenIds = addNewChildrenToGenepool(genepool, breedingPairsJson, logger);
+
+        breedGenepoolJSON.put("message", "Successfully bred Genepool.");
+        breedGenepoolJSON.put("breedingPairs", breedingPairsJson.toJSONString());
+        breedGenepoolJSON.put("newChildrenIds", newChildrenIds.toJSONString());
+
+        return breedGenepoolJSON;
+    }
+
+    private static JSONArray addNewChildrenToGenepool(Genepool genepool, JSONArray breedingPairs, LambdaLogger logger) {
+        JSONArray newChildIds = new JSONArray();
+        logger.log("Adding new children to genepool.");
+
+        for(Object breedingPair : breedingPairs) {
+            String childId = ((JSONObject) breedingPair).get(CHILD_ID_KEY).toString();
+
+            genepool.addOrganismToGenepool(childId);
+            newChildIds.add(childId);
+        }
+
+        kickOffSaveGenepoolStepFunction(genepool, logger);
+
+        return newChildIds;
+    }
+
+    private static JSONArray kickoffBreedingPairs(List<BreedingPair> breedingPairs, LambdaLogger logger) {
+        JSONArray breedingPairsJson = new JSONArray();
+        logger.log("Kicking off breeding pairs.");
+
+        for(BreedingPair breedingPair : breedingPairs) {
+            JSONObject breedingPairMessage = new JSONObject();
+            breedingPairMessage.put(PARENT_ONE_ID_KEY, breedingPair.organismOneId);
+            breedingPairMessage.put(PARENT_TWO_ID_KEY, breedingPair.organismTwoId);
+            breedingPairMessage.put(CHILD_ID_KEY, getNextGenepoolId());
+
+            logger.log(kickoffBreedOrganismsStepFunction(breedingPairMessage).toString());
+
+            breedingPairsJson.add(breedingPairMessage);
+        }
+
+        return breedingPairsJson;
+    }
+
+    private static StartExecutionResult kickoffBreedLargeGenepoolStepFunction(Genepool genepool) {
+        AWSStepFunctionsClient awsStepFunctionsClient = (AWSStepFunctionsClient) AWSStepFunctionsClientBuilder.defaultClient();
+        Gson gson = new Gson();
+        String genepoolString = gson.toJson(genepool);
+
+        StartExecutionRequest stepFunctionRequest = new StartExecutionRequest();
+        stepFunctionRequest.setInput(genepoolString);
+        stepFunctionRequest.setStateMachineArn(BREED_LARGE_GENEPOOL_STEP_FUNCTION_ARN);
+
+        StartExecutionResult startExecutionResult = awsStepFunctionsClient.startExecution(stepFunctionRequest);
+
+        return startExecutionResult;
+    }
+
+    private static StartExecutionResult kickoffBreedOrganismsStepFunction(JSONObject breedOrganismsObject) {
+        AWSStepFunctionsClient awsStepFunctionsClient = (AWSStepFunctionsClient) AWSStepFunctionsClientBuilder.defaultClient();
+
+        StartExecutionRequest stepFunctionRequest = new StartExecutionRequest();
+        stepFunctionRequest.setInput(breedOrganismsObject.toJSONString());
+        stepFunctionRequest.setStateMachineArn(CALL_BREED_ORGANISM_STEP_FUNCTION_ARN);
+
+        StartExecutionResult startExecutionResult = awsStepFunctionsClient.startExecution(stepFunctionRequest);
+
+        return startExecutionResult;
+    }
+
+    private static List<BreedingPair> buildBreedingPairs(List<String> genePoolOrganisms) {
         List<BreedingPair> breedingPairs = new ArrayList<>();
-        List<String> genePoolOrganisms = genepool.getOrganismsInGenepool();
         Random random = new Random();
 
-        while (genePoolOrganisms.size() > 2) {
+        while (genePoolOrganisms.size() >= 2) {
             BreedingPair nextBreedingPair = new BreedingPair();
             int organismIndex = random.nextInt(genePoolOrganisms.size());
             nextBreedingPair.organismOneId = genePoolOrganisms.get(organismIndex);
@@ -80,16 +167,12 @@ public class BreedGenepool extends ApiGatewayProxyLambda {
             genePoolOrganisms.remove(organismIndex);
 
             breedingPairs.add(nextBreedingPair);
-            breedingPairsJson.add(nextBreedingPair.toString());
         }
 
-        breedGenepoolJSON.put("message", "Successfully bred Genepool.");
-        breedGenepoolJSON.put("breedingPairs", breedingPairsJson.toJSONString());
-
-        return breedGenepoolJSON;
+        return breedingPairs;
     }
 
-    public class BreedingPair {
+    public static class BreedingPair {
         public String organismOneId;
         public String organismTwoId;
 

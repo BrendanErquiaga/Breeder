@@ -5,6 +5,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import com.erquiaga.genepool.models.Genepool;
+import com.google.api.client.http.*;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,6 +19,8 @@ import java.io.InputStreamReader;
 import static com.erquiaga.genepool.utils.GenepoolConstants.*;
 
 public class GenepoolRequestUtils {
+
+    static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
     public static String getPathParameter(JSONObject eventObject, String pathParameterKey) {
         JSONObject pathParameters = (JSONObject)eventObject.get(EVENT_PATH_PARAMETERS_KEY);
@@ -85,5 +89,19 @@ public class GenepoolRequestUtils {
         }
 
         return isValid;
+    }
+
+    public static String postRequest(String reqUrl, String requestBody) throws IOException {
+        GenericUrl url = new GenericUrl(reqUrl);
+        HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory();
+        HttpRequest request = requestFactory.buildPostRequest(url, ByteArrayContent.fromString("application/json", requestBody));
+        request.getHeaders().setContentType("application/json");
+        request.setConnectTimeout(100000);
+        request.setReadTimeout(100000);
+        HttpResponse response = request.execute();
+
+        System.out.println(response.getStatusCode());
+
+        return response.parseAsString();
     }
 }

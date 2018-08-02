@@ -45,6 +45,5 @@ public class BreederRequestUtils {
         System.out.println(response.getStatusCode());
 
         return response.parseAsString();
-
     }
 }
