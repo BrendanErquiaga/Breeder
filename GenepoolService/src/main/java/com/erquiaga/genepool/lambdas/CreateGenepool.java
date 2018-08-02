@@ -9,6 +9,9 @@ import com.amazonaws.services.stepfunctions.model.StartExecutionResult;
 import com.erquiaga.genepool.models.Genepool;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.erquiaga.genepool.utils.GenepoolConstants.SAVE_GENEPOOL_STEP_FUNCTION_ARN;
 import static com.erquiaga.genepool.utils.GenepoolRequestUtils.getNextGenepoolId;
 
@@ -18,6 +21,8 @@ public class CreateGenepool {
     public String createGenepoolHandler(Genepool genepool, Context context) {
         LambdaLogger logger = context.getLogger();
         logger.log("Creating a Genepool");
+
+        genepool = new Genepool();
 
         if(genepool.getId() == null) {
             genepool.setId(getNextGenepoolId());

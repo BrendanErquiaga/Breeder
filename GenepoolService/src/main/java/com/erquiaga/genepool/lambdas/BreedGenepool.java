@@ -53,7 +53,7 @@ public class BreedGenepool extends ApiGatewayProxyLambda {
 
             if(genepool != null) {
 
-                if(genepool.getOrganismsInGenepool().size() >= LARGE_GENEPOOL_SIZE) {
+                if(genepool.genePoolSize() >= LARGE_GENEPOOL_SIZE) {
                     StartExecutionResult startBreedLargeGenepoolResult = kickoffBreedLargeGenepoolStepFunction(genepool);
                     logger.log(startBreedLargeGenepoolResult.toString());
 
@@ -80,6 +80,8 @@ public class BreedGenepool extends ApiGatewayProxyLambda {
 
     public static JSONObject breedGenepool(Genepool genepool, LambdaLogger logger) {
         JSONObject breedGenepoolJSON = new JSONObject();
+
+        genepool.bredNewGeneration();
 
         List<BreedingPair> breedingPairs = buildBreedingPairs(new ArrayList<>(genepool.getOrganismsInGenepool()));
         JSONArray breedingPairsJson = kickoffBreedingPairs(breedingPairs, logger);
