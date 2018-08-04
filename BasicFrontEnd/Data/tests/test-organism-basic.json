@@ -1,0 +1,31 @@
+{
+  "id": 0,
+  "type": "slime",
+  "breedingRules": "{ \"restrictions\" : \"type\" }",
+  "metadata": "{ \"name\" : \"Sally the Slime\" }",
+  "dna": "{ [ {\"gene-id\" : 0, \"value\" : 12 }, {\"gene-id\" : 1, \"value\" : 24 } ] }"
+}
+
+{
+  "type": "blob",
+  "breedingRules": {
+    "restrictions": "type"
+  },
+  "metadata": {
+    "name": "Bob the blob"
+  },
+  "dna": {
+    "active-genes": [
+      {
+        "gene-id": 0,
+        "value": 12
+      }
+    ],
+    "inactive-genes": [
+      {
+        "gene-id": 2,
+        "value": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "path": "/breeding/breed/",
+  "headers": null,
+  "pathParameters": null,
+  "isBase64Encoded": false,
+  "requestContext": {
+    "path": "/breeding/breed/{proxy+}",
+    "accountId": "057419751866",
+    "resourceId": "2pty26",
+    "stage": "test-invoke-stage",
+    "requestId": "e383f217-6f72-11e8-83d9-5f5374bcb4e7",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "cognitoIdentityId": null,
+      "apiKey": "test-invoke-api-key",
+      "cognitoAuthenticationType": null,
+      "userArn": "arn:aws:iam::057419751866:root",
+      "apiKeyId": "test-invoke-api-key-id",
+      "userAgent": "aws-internal/3",
+      "accountId": "057419751866",
+      "caller": "057419751866",
+      "sourceIp": "test-invoke-source-ip",
+      "accessKey": "ASIAIUWWSKNSMAOAHMIA",
+      "cognitoAuthenticationProvider": null,
+      "user": "057419751866"
+    },
+    "resourcePath": "/breeding/breed/{proxy+}",
+    "httpMethod": "GET",
+    "extendedRequestId": "IcvY8Fl4PHcF5-w=",
+    "apiId": "07c08va773"
+  },
+  "resource": "/breeding/breed/{proxy+}",
+  "httpMethod": "GET",
+  "queryStringParameters": {
+    "organismType": "chicken",
+    "parentOneId": "200"
+  },
+  "stageVariables": null,
+  "body": null
+}

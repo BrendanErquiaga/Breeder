@@ -1,0 +1,99 @@
+{
+  "id": "0",
+  "type": "chicken",
+  "breedingRules": {
+    "restrictions": "type"
+  },
+  "metadata": {
+    "name": "Plymouth Rock 1"
+  },
+  "dna": {
+    "chromosomes": [{
+      "traits": [{
+        "geneB": {
+          "expressionValue": "16777215",
+          "combinationValue": "1"
+        },
+        "geneA": {
+          "expressionValue": "16777215",
+          "combinationValue": "1"
+        },
+        "traitId": "FeatherColor1"
+      }, {
+        "geneB": {
+          "expressionValue": "5263440",
+          "combinationValue": "0"
+        },
+        "geneA": {
+          "expressionValue": "0",
+          "combinationValue": "1"
+        },
+        "traitId": "FeatherColor2"
+      }, {
+        "geneB": {
+          "expressionValue": "3",
+          "combinationValue": "1"
+        },
+        "geneA": {
+          "expressionValue": "3",
+          "combinationValue": "1"
+        },
+        "traitId": "FeatherPattern"
+      }, {
+        "geneB": {
+          "expressionValue": "0",
+          "combinationValue": "0"
+        },
+        "geneA": {
+          "expressionValue": "16758049",
+          "combinationValue": "1"
+        },
+        "traitId": "BeakColor"
+      }, {
+        "geneB": {
+          "expressionValue": "16720205",
+          "combinationValue": "1"
+        },
+        "geneA": {
+          "expressionValue": "16720205",
+          "combinationValue": "1"
+        },
+        "traitId": "WaddleColor"
+      }],
+      "chromosomeID": "ChickenVisuals"
+    }, {
+      "traits": [{
+        "geneB": {
+          "expressionValue": "9",
+          "combinationValue": "1"
+        },
+        "geneA": {
+          "expressionValue": "13",
+          "combinationValue": "1"
+        },
+        "traitId": "Size"
+      }, {
+        "geneB": {
+          "expressionValue": "9",
+          "combinationValue": "1"
+        },
+        "geneA": {
+          "expressionValue": "10",
+          "combinationValue": "1"
+        },
+        "traitId": "Life Span"
+      }, {
+        "geneB": {
+          "expressionValue": "1",
+          "combinationValue": "1"
+        },
+        "geneA": {
+          "expressionValue": "1",
+          "combinationValue": "1"
+        },
+        "traitId": "Sex"
+      }],
+      "chromosomeID": "Physical"
+    }]
+  }
+}

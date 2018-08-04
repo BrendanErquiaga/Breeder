@@ -1,0 +1,51 @@
+{
+  "id" : "0",
+  "name" : "weird",
+  "FeatherColor1" : "#0f0cff",
+  "FeatherColor2" : "#000000",
+  "BeakColor" : "#aaff12",
+  "WaddleColor" : "#672300",
+  "FeatherPattern" : "1",
+  "Size" : 10,
+  "Life Span" : 13,
+  "Sex" : 0
+}
+
+{
+  "id" : "0",
+  "name" : "burnt",
+  "FeatherColor1" : "#581845",
+  "FeatherColor2" : "#900C3F",
+  "BeakColor" : "#FFC300",
+  "WaddleColor" : "#FF5733",
+  "FeatherPattern" : "1",
+  "Size" : 10,
+  "Life Span" : 13,
+  "Sex" : 0
+}
+
+{
+  "id" : "1",
+  "name" : "tropical",
+  "FeatherColor1" : "#A8E6CE",
+  "FeatherColor2" : "#DCEDC2",
+  "BeakColor" : "#FF8C94",
+  "WaddleColor" : "#FFD3B5",
+  "FeatherPattern" : "1",
+  "Size" : 10,
+  "Life Span" : 13,
+  "Sex" : 0
+}
+
+{
+  "id" : "2",
+  "name" : "cool",
+  "FeatherColor1" : "#9DE0AD",
+  "FeatherColor2" : "#45ADAB",
+  "BeakColor" : "#FF5733",
+  "WaddleColor" : "#9BD1E5",
+  "FeatherPattern" : "1",
+  "Size" : 10,
+  "Life Span" : 13,
+  "Sex" : 0
+}

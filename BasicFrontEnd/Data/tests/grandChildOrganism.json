@@ -1,0 +1,60 @@
+{
+  "id": "20",
+  "type": "blob",
+  "breedingRules": {
+    "restrictions": "type"
+  },
+  "metadata": {
+    "name": "pmzgjqnzfj spawn of ptgxsnftne spawn of Bob & Barry & gpchevt spawn of Bob & Barry",
+    "parents": ["ptgxsnftne spawn of Bob & Barry", "gpchevt spawn of Bob & Barry"]
+  },
+  "dna": {
+    "chromosomes": [{
+      "traits": [{
+        "geneB": {
+          "expressionValue": 3,
+          "combinationValue": 1
+        },
+        "geneA": {
+          "expressionValue": 2,
+          "combinationValue": 0
+        },
+        "traitId": "color"
+      }, {
+        "geneB": {
+          "expressionValue": 128,
+          "combinationValue": 0.5
+        },
+        "geneA": {
+          "expressionValue": 128,
+          "combinationValue": 0.5
+        },
+        "traitId": "size"
+      }],
+      "chromosomeID": "appearance"
+    }, {
+      "traits": [{
+        "geneB": {
+          "expressionValue": 100,
+          "combinationValue": 0.5
+        },
+        "geneA": {
+          "expressionValue": 50,
+          "combinationValue": 0.5
+        },
+        "traitId": "foodDesire"
+      }, {
+        "geneB": {
+          "expressionValue": 128,
+          "combinationValue": 0
+        },
+        "geneA": {
+          "expressionValue": 128,
+          "combinationValue": 0
+        },
+        "traitId": "sleepDesire"
+      }],
+      "chromosomeID": "stats"
+    }]
+  }
+}

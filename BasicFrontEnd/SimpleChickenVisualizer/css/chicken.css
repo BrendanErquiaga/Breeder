@@ -1,0 +1,99 @@
+.chickenContainer div {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.chickenContainer p {
+  color: #ffffff;
+  display: block;
+  margin: 150px 0 0 165px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.chickenContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 100%;
+    border: 2px solid #e5e5e5;
+    opacity: 0.99;
+    transform: scale(0.5, 0.5);
+}
+
+.chicken {
+    width: 275px;
+    height: 275px;
+    border-radius: 100px 0 100px 0;
+    background-color: #ffffff;
+    position: relative;
+    top: 110px;
+    left: 100px;
+}
+
+.wing {
+    width: 140px;
+    height: 140px;
+    border-radius: 60px 0 60px 0;
+    background-color: #ffffff;
+    position: absolute;
+    top: 135px;
+}
+
+.eye {
+    width:30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: #000000;
+    position: absolute;
+    left: 205px;
+    top: 28px;
+}
+
+.beak_top {
+    width: 70px;
+    height: 50px;
+    border-radius: 30px 15px 25px 15px;
+    transform: skew(50deg);
+    background-color: #ffd026;
+    position: relative;
+    left: 225px;
+    z-index: -1;
+}
+
+.crest {
+    width: 20px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: #f41313;
+    z-index: -1;
+}
+
+.crest1 {
+    position: relative;
+    top: -65px;
+    left: 200px;
+}
+
+.crest2 {
+    position: relative;
+    top: -105px;
+    left: 215px;
+}
+
+.crest3 {
+    position: relative;
+    top: -125px;
+    left: 230px;
+}
+
+.wattle {
+    width: 20px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: #f41313;
+    position: relative;
+    left: 265px;
+    top: -100px;
+    z-index: -2;
+}

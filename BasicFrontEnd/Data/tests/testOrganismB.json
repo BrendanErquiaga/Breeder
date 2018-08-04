@@ -1,0 +1,72 @@
+{
+  "type": "blob",
+  "breedingRules": {
+    "restrictions": "type"
+  },
+  "metadata": {
+    "name": "Bob",
+    "age": 1,
+    "health": {
+      "mental": 4,
+      "physical": 3,
+      "hunger": 0,
+      "energy": 4
+    }
+  },
+  "dna": {
+    "chromosomes": [
+      {
+        "chromosomeID": "appearance",
+        "traits": [{
+            "traitId": "color",
+            "geneA": {
+              "expressionValue": 3,
+              "combinationValue": 1
+            },
+            "geneB": {
+              "expressionValue": 3,
+              "combinationValue": 1
+            }
+          },
+          {
+            "traitId": "size",
+            "geneA": {
+              "expressionValue": 150,
+              "combinationValue": 0.5
+            },
+            "geneB": {
+              "expressionValue": 150,
+              "combinationValue": 0.5
+            }
+          }
+        ]
+      },
+      {
+        "chromosomeID": "stats",
+        "traits": [{
+            "traitId": "foodDesire",
+            "geneA": {
+              "expressionValue": 50,
+              "combinationValue": 0.5
+            },
+            "geneB": {
+              "expressionValue": 50,
+              "combinationValue": 0.5
+            }
+          },
+          {
+            "traitId": "sleepDesire",
+            "geneA": {
+              "expressionValue": 128,
+              "combinationValue": 0
+            },
+            "geneB": {
+              "expressionValue": 128,
+              "combinationValue": 0
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

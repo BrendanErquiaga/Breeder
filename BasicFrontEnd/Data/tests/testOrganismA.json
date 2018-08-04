@@ -1,0 +1,66 @@
+{
+  "id": "1529461461595",
+  "type": "blob",
+  "breedingRules": {
+    "restrictions": "type"
+  },
+  "metadata": {
+    "name": "Larry",
+    "health": {
+      "mental": 5,
+      "physical": 5,
+      "hunger": 0,
+      "energy": 5
+    },
+    "age": 1
+  },
+  "dna": {
+    "chromosomes": [{
+      "traits": [{
+        "geneB": {
+          "expressionValue": 2,
+          "combinationValue": 0
+        },
+        "geneA": {
+          "expressionValue": 1,
+          "combinationValue": 1
+        },
+        "traitId": "color"
+      }, {
+        "geneB": {
+          "expressionValue": 64,
+          "combinationValue": 0.5
+        },
+        "geneA": {
+          "expressionValue": 128,
+          "combinationValue": 0.5
+        },
+        "traitId": "size"
+      }],
+      "chromosomeID": "appearance"
+    }, {
+      "traits": [{
+        "geneB": {
+          "expressionValue": 10,
+          "combinationValue": 0.1
+        },
+        "geneA": {
+          "expressionValue": 100,
+          "combinationValue": 0.9
+        },
+        "traitId": "foodDesire"
+      }, {
+        "geneB": {
+          "expressionValue": 256,
+          "combinationValue": 0
+        },
+        "geneA": {
+          "expressionValue": 256,
+          "combinationValue": 0
+        },
+        "traitId": "sleepDesire"
+      }],
+      "chromosomeID": "stats"
+    }]
+  }
+}

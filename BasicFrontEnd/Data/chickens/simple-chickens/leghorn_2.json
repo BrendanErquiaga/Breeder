@@ -1,0 +1,99 @@
+{
+  "id": "1533161292569",
+  "type": "chicken",
+  "metadata": {
+    "name": "Leghorn 2"
+  },
+  "breedingRules" : {
+    "restrictions" : "type"
+  },
+  "dna": {
+    "chromosomes": [{
+      "chromosomeID": "ChickenVisuals",
+      "traits": [{
+        "traitId": "FeatherColor1",
+        "geneA": {
+          "expressionValue": "16777215",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "16777215",
+          "combinationValue": "1"
+        }
+      }, {
+        "traitId": "FeatherColor2",
+        "geneA": {
+          "expressionValue": "16777215",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "1929977",
+          "combinationValue": "0"
+        }
+      }, {
+        "traitId": "FeatherPattern",
+        "geneA": {
+          "expressionValue": "1",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "2",
+          "combinationValue": "0"
+        }
+      }, {
+        "traitId": "BeakColor",
+        "geneA": {
+          "expressionValue": "16758049",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "0",
+          "combinationValue": "0"
+        }
+      }, {
+        "traitId": "WaddleColor",
+        "geneA": {
+          "expressionValue": "16720205",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "16720205",
+          "combinationValue": "1"
+        }
+      }]
+    }, {
+      "chromosomeID": "Physical",
+      "traits": [{
+        "traitId": "Size",
+        "geneA": {
+          "expressionValue": "9",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "5",
+          "combinationValue": "1"
+        }
+      }, {
+        "traitId": "Life Span",
+        "geneA": {
+          "expressionValue": "17",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "14",
+          "combinationValue": "1"
+        }
+      }, {
+        "traitId": "Sex",
+        "geneA": {
+          "expressionValue": "1",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "1",
+          "combinationValue": "1"
+        }
+      }]
+    }]
+  }
+}
