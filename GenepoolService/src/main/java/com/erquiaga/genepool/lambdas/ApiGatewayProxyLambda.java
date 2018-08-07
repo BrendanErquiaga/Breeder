@@ -7,7 +7,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.*;
+import java.util.Map;
 
+import static com.erquiaga.genepool.utils.GenepoolConstants.GENERIC_RESPONSE_HEADERS;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 
@@ -24,6 +26,7 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStreamCopy));
 
         JSONObject responseJson = new JSONObject();
+        JSONObject headersJson = new JSONObject();
 
         try {
             JSONObject jsonEventObject = (JSONObject) parser.parse(reader);
@@ -52,6 +55,12 @@ public class ApiGatewayProxyLambda implements RequestStreamHandler {
             responseJson.put("statusCode", SC_BAD_REQUEST);
             responseJson.put("exception", e);
         }
+
+        for(Map.Entry<String,String> entry : GENERIC_RESPONSE_HEADERS.entrySet()) {
+            headersJson.put(entry.getKey(), entry.getValue());
+        }
+
+        responseJson.put("headers", headersJson);
 
 
         responseJson.put("isBase64Encoded", false);

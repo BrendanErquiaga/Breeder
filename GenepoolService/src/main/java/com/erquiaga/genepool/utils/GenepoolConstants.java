@@ -1,5 +1,9 @@
 package com.erquiaga.genepool.utils;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class GenepoolConstants {
     public final static String GENEPOOL_ID_KEY = "id";
     public final static String ORGANISM_ID_PATH_PARAM_KEY = "organism-id";
@@ -30,4 +34,16 @@ public class GenepoolConstants {
     public final static String SAVE_GENEPOOL_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:SaveGenepool";
     public final static String CALL_BREED_ORGANISM_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:CallBreedOrganisms";
     public final static String BREED_LARGE_GENEPOOL_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:BreedLargeGenepool";
+
+    //CORS Stuff
+    public final static Map<String, String> GENERIC_RESPONSE_HEADERS;
+    static {
+        Map<String, String> responseHeaders = new HashMap<>();
+
+        responseHeaders.put("Access-Control-Allow-Origin", "*");
+        responseHeaders.put("Content-Type", "application/json");
+
+
+        GENERIC_RESPONSE_HEADERS = Collections.unmodifiableMap(responseHeaders);
+    }
 }

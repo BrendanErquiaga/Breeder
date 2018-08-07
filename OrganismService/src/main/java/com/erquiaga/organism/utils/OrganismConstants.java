@@ -24,7 +24,7 @@ public class OrganismConstants {
     public final static String ORGANISM_FILE_SUFFIX = ".json";
     public final static String SAVE_ORGANISM_STEP_FUNCTION_ARN = "arn:aws:states:us-west-2:057419751866:stateMachine:SaveOrganism";
 
-    //BAD THINGS
+    //CORS Stuff
     public final static Map<String, String> GENERIC_RESPONSE_HEADERS;
     static {
         Map<String, String> responseHeaders = new HashMap<>();
