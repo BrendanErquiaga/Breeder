@@ -57,10 +57,12 @@ public class ListOrganisms extends ApiGatewayProxyLambda {
 
             for(S3ObjectSummary organismObjectSummary : organisms.getObjectSummaries()) {
                 String organismKey = organismObjectSummary.getKey();
-                organismKey = organismKey.substring(0, organismKey.length() - 5);
-                organismKey = organismKey.substring(ORGANISM_FOLDER.length(), organismKey.length());
+                if(!organismKey.equals(ORGANISM_FOLDER)) {
+                    organismKey = organismKey.substring(0, organismKey.length() - 5);
+                    organismKey = organismKey.substring(ORGANISM_FOLDER.length(), organismKey.length());
 
-                organismList.add(organismKey);
+                    organismList.add(organismKey);
+                }
             }
 
             responseBody.put("organisms", organismList);
