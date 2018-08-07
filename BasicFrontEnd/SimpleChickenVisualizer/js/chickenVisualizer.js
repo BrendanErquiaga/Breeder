@@ -1,33 +1,31 @@
 "use strict";
 
-var tropicalChicken = {
-  "id" : "1",
-  "name" : "tropical",
-  "FeatherColor1" : "#A8E6CE",
-  "FeatherColor2" : "#DCEDC2",
-  "BeakColor" : "#FFD3B5",
-  "WattleColor" : "#FF8C94",
-  "FeatherPattern" : "1",
-  "Size" : 10,
-  "Life Span" : 13,
-  "Sex" : 0
-};
+var chickenBlock = '<div class="chickenContainer" id="customChicken1"><div class="chicken"><div class="wing"></div><div class="eye"></div><div class="beak_top"></div><div class="crest crest1"></div><div class="crest crest2"></div><div class="crest crest3"></div><div class="wattle"></div></div><p>ID: <span class="chickenId"></span><br>Name: <span class="chickenName"></span></p></div>"',
+  chickenCount = 0;
 
 $(document).ready(function() {
     pageLoad();
 });
 
 function pageLoad() {
-  loadCustomChicken("customChicken1", getChickenObject(tropicalChickenDNA));
-  loadCustomChicken("customChicken2", getChickenObject(burntChickenDNA));
-  loadCustomChicken("customChicken3", getChickenObject(leghornChickenDNA));
-  loadCustomChicken("customChicken4", getChickenObject(plymouthChickenDNA));
+  addCustomChicken(tropicalChickenDNA);
+  addCustomChicken(burntChickenDNA);
+  addCustomChicken(leghornChickenDNA);
+  addCustomChicken(plymouthChickenDNA);
 }
 
-function loadCustomChicken(chickenElementId, chicken) {
-  var chickenParent = $("#" + chickenElementId);
+function addCustomChicken(chickenDNA) {
+  var newChickenID = "chicken" + chickenCount++,
+      newBlock = $(chickenBlock).attr('id', newChickenID);
 
-  //SetMainFeatherColor
+  newBlock.appendTo(".chickenRow");
+
+  loadCustomChicken(newChickenID, getChickenObject(chickenDNA));
+}
+
+function loadCustomChicken(chickenBlockId, chicken) {
+  var chickenParent = $("#" + chickenBlockId);
+
   $(chickenParent).find(".chicken").css("background-color", chicken.FeatherColor1);
   $(chickenParent).find(".wing").css("background-color", chicken.FeatherColor2);
   $(chickenParent).find(".beak_top").css("background-color", chicken.BeakColor);
