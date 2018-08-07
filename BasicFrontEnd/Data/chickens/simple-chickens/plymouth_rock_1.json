@@ -1,5 +1,5 @@
 {
-  "id": "1533161268991",
+  "id": "0",
   "type": "chicken",
   "metadata": {
     "name": "Plymouth Rock 1"
@@ -13,22 +13,22 @@
       "traits": [{
         "traitId": "FeatherColor1",
         "geneA": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
-        },
-        "geneB": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
-        }
-      }, {
-        "traitId": "FeatherColor2",
-        "geneA": {
           "expressionValue": "0",
           "combinationValue": "1"
         },
         "geneB": {
           "expressionValue": "5263440",
           "combinationValue": "0"
+        }
+      }, {
+        "traitId": "FeatherColor2",
+        "geneA": {
+          "expressionValue": "16777215",
+          "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "16777215",
+          "combinationValue": "1"
         }
       }, {
         "traitId": "FeatherPattern",
@@ -51,7 +51,7 @@
           "combinationValue": "0"
         }
       }, {
-        "traitId": "WaddleColor",
+        "traitId": "WattleColor",
         "geneA": {
           "expressionValue": "16720205",
           "combinationValue": "1"
@@ -74,7 +74,7 @@
           "combinationValue": "1"
         }
       }, {
-        "traitId": "Life Span",
+        "traitId": "LifeSpan",
         "geneA": {
           "expressionValue": "10",
           "combinationValue": "1"

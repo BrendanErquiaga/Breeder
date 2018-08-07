@@ -1,5 +1,5 @@
 {
-  "id": "1533161301670",
+  "id": "2",
   "type": "chicken",
   "metadata": {
     "name": "Leghorn 1"
@@ -51,7 +51,7 @@
           "combinationValue": "0"
         }
       }, {
-        "traitId": "WaddleColor",
+        "traitId": "WattleColor",
         "geneA": {
           "expressionValue": "14038289",
           "combinationValue": "1"
@@ -74,7 +74,7 @@
           "combinationValue": "1"
         }
       }, {
-        "traitId": "Life Span",
+        "traitId": "LifeSpan",
         "geneA": {
           "expressionValue": "15",
           "combinationValue": "1"
