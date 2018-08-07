@@ -3,28 +3,58 @@
 var chickenBlock = '<div class="chickenContainer" id="customChicken1"><div class="chicken"><div class="wing"></div><div class="eye"></div><div class="beak_top"></div><div class="crest crest1"></div><div class="crest crest2"></div><div class="crest crest3"></div><div class="wattle"></div></div><p>ID: <span class="chickenId"></span><br>Name: <span class="chickenName"></span></p></div>"',
   chickenCount = 0,
   getChickenURL = "https://du1ejfbfoe.execute-api.us-west-2.amazonaws.com/DEV/organism/",
-  chickenIDs = [ 0, 1, 2, 3, 4];
+  getGenepoolURL= "https://oy0br9jib0.execute-api.us-west-2.amazonaws.com/DEV/",
+  genepoolID, genepoolObject, loadedChickens = [];
 
 $(document).ready(function() {
     pageLoad();
 });
 
 function pageLoad() {
+  attemptToLoadGenepool();
+}
+
+function attemptToLoadGenepool() {
+  var urlParams = new URLSearchParams(window.location.search);
+
+  if(urlParams.has('genepoolID')) {
+    genepoolID = urlParams.get('genepoolID');
+    fetchGenepool();
+  } else {
+    console.warn("No genepool present this page won't do anything... Probably add some helper text");
+  }
+}
+
+function fetchGenepool() {
+    var request = $.get(getGenepoolURL + genepoolID, function(data) {
+      genepoolFetched(data);
+    });
+
+    request.fail(function() {
+      console.error("Error fetching genepool data: " + genepoolID);
+    });
+}
+
+function genepoolFetched(genepoolData) {
+  genepoolObject = genepoolData;
+  console.log(genepoolObject);
+
+  $("#genepoolId").html("id: " + genepoolObject.id);
+  $("#organismCount").html("organisms: " + genepoolObject.organismsInGenepool.length);
+  $("#generationCount").html("generations: " + genepoolObject.genepoolGenerations.length);
+  $("#timesBred").html("breedings: " + genepoolObject.timesBred);
+
   loadChickens();
 }
 
 function loadChickens() {
-  for (var i = 0; i < chickenIDs.length; i++) {
-    callGetChickenURL(i);
+  for (var i = 0; i < genepoolObject.organismsInGenepool.length; i++) {
+    callGetChickenURL(genepoolObject.organismsInGenepool[i]);
   }
-
-  console.log("All chickens loaded!");
 }
 
 function callGetChickenURL(chickenID) {
-  var fullUrl = getChickenURL + chickenID;
-
-  var request = $.get(fullUrl, function(data) {
+  var request = $.get(getChickenURL + chickenID, function(data) {
     addCustomChicken(data);
   });
 
@@ -53,4 +83,7 @@ function loadCustomChicken(chickenBlockId, chicken) {
 
   $(chickenParent).find(".chickenId").html(chicken.id);
   $(chickenParent).find(".chickenName").html(chicken.name);
+
+  loadedChickens.push(chicken);
+  console.log(loadedChickens);
 }

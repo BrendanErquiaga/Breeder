@@ -1,7 +1,5 @@
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #4f5f7a;
 }
 
@@ -10,4 +8,12 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+#genepoolStats {
+  color: #FFFFFF;
+}
+
+#genepoolStats p {
+  margin: 0;
 }
