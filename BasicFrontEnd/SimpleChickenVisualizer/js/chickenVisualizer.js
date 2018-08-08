@@ -49,12 +49,12 @@ function genepoolFetched(genepoolData) {
 
 function loadGenerations() {
   for (var i = 0; i < genepoolObject.genepoolGenerations.length; i++) {
-    loadGeneration(genepoolObject.genepoolGenerations[i]);
+    loadGeneration(genepoolObject.genepoolGenerations[i], i);
   }
 }
 
 function loadGeneration(generation, generationID) {
-  var newGenerationID = "generationRow_" + genepoolID,
+  var newGenerationID = "generationRow_" + generationID,
       newGenerationBlock = $(chickenRowBlock).attr('id', newGenerationID);
 
   newGenerationBlock.appendTo("#chickenRowHolder");
