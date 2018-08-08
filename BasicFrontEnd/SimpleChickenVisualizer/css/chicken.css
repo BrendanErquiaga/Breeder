@@ -13,7 +13,7 @@
 }
 
 .chickenContainer.selected{
-    border: 10px #156d6d;
+    border: 10px var(--mild-green);
     border-style: solid solid dashed solid;
 }
 
