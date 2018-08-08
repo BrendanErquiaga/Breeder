@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Visual Testings</title>
+  <link href="./css/chicken.css" rel="stylesheet">
+  <link href="./css/visualizer.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="closeRow" id="controlRow">
+    <p id="genepoolStats">
+      <span id="genepoolId">ID: 0</span> |
+      <span id="organismCount">Organisms: 28</span> |
+      <span id="generationCount">Generations: 7</span> |
+      <span id="timesBred">Breedings: 6</span>
+    </p>
+  </div>
+  <div class="row" id="buttonRow">
+    <button class="button breedButton" onclick="breedGenepoolButtonClicked()" id="breedButton">Breed</button>
+    <button class="button killButton" onclick="cullGenepoolButtonClicked()"  id="cullButton">Cull</button>
+  </div>
+  <div class="row" id="generationRow_0">
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken20">
+      <div class="chicken" style="background-color: rgb(255, 255, 255);">
+        <div class="wing" style="background-color: rgb(255, 255, 255);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(255, 181, 33);"></div>
+        <div class="crest crest1" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest2" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest3" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="wattle" style="background-color: rgb(255, 33, 77);"></div>
+      </div>
+    </div>
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken22">
+      <div class="chicken" style="background-color: rgb(0, 0, 0);">
+        <div class="wing" style="background-color: rgb(255, 255, 255);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(255, 181, 33);"></div>
+        <div class="crest crest1" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest2" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest3" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="wattle" style="background-color: rgb(255, 33, 77);"></div>
+      </div>
+    </div>
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken27">
+      <div class="chicken" style="background-color: rgb(252, 242, 239);">
+        <div class="wing" style="background-color: rgb(252, 242, 239);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(249, 246, 29);"></div>
+        <div class="crest crest1" style="background-color: rgb(214, 53, 17);"></div>
+        <div class="crest crest2" style="background-color: rgb(214, 53, 17);"></div>
+        <div class="crest crest3" style="background-color: rgb(214, 53, 17);"></div>
+        <div class="wattle" style="background-color: rgb(214, 53, 17);"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="generationRow_5">
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken1">
+      <div class="chicken" style="background-color: rgb(252, 242, 239);">
+        <div class="wing" style="background-color: rgb(255, 255, 255);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(249, 246, 29);"></div>
+        <div class="crest crest1" style="background-color: rgb(214, 53, 17);"></div>
+        <div class="crest crest2" style="background-color: rgb(214, 53, 17);"></div>
+        <div class="crest crest3" style="background-color: rgb(214, 53, 17);"></div>
+        <div class="wattle" style="background-color: rgb(214, 53, 17);"></div>
+      </div>
+    </div>
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken2">
+      <div class="chicken" style="background-color: rgb(240, 190, 171);">
+        <div class="wing" style="background-color: rgb(252, 242, 239);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(0, 0, 0);"></div>
+        <div class="crest crest1" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest2" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest3" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="wattle" style="background-color: rgb(255, 33, 77);"></div>
+      </div>
+    </div>
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken11">
+      <div class="chicken" style="background-color: rgb(31, 135, 127);">
+        <div class="wing" style="background-color: rgb(31, 135, 127);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(0, 0, 0);"></div>
+        <div class="crest crest1" style="background-color: rgb(244, 9, 38);"></div>
+        <div class="crest crest2" style="background-color: rgb(244, 9, 38);"></div>
+        <div class="crest crest3" style="background-color: rgb(244, 9, 38);"></div>
+        <div class="wattle" style="background-color: rgb(244, 9, 38);"></div>
+      </div>
+    </div>
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken18">
+      <div class="chicken" style="background-color: rgb(240, 190, 171);">
+        <div class="wing" style="background-color: rgb(255, 255, 255);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(255, 181, 33);"></div>
+        <div class="crest crest1" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest2" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest3" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="wattle" style="background-color: rgb(255, 33, 77);"></div>
+      </div>
+    </div>
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken21">
+      <div class="chicken" style="background-color: rgb(255, 255, 255);">
+        <div class="wing" style="background-color: rgb(255, 255, 255);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(249, 246, 29);"></div>
+        <div class="crest crest1" style="background-color: rgb(244, 9, 38);"></div>
+        <div class="crest crest2" style="background-color: rgb(244, 9, 38);"></div>
+        <div class="crest crest3" style="background-color: rgb(244, 9, 38);"></div>
+        <div class="wattle" style="background-color: rgb(244, 9, 38);"></div>
+      </div>
+    </div>
+    <div class="chickenContainer" onclick='chickenContainerSelected(this)' id="chicken24">
+      <div class="chicken" style="background-color: rgb(131, 136, 247);">
+        <div class="wing" style="background-color: rgb(255, 255, 255);"></div>
+        <div class="eye"></div>
+        <div class="beak_top" style="background-color: rgb(255, 181, 33);"></div>
+        <div class="crest crest1" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest2" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="crest crest3" style="background-color: rgb(255, 33, 77);"></div>
+        <div class="wattle" style="background-color: rgb(255, 33, 77);"></div>
+      </div>
+    </div>
+  </div>
+  <script src="./js/jquery-3.3.1.min.js"></script>
+  <script src="./js/visualizerInput.js"></script>
+</body>
+
+</html>

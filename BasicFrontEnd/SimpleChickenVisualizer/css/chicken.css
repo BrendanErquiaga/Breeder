@@ -1,25 +1,26 @@
-.chickenContainer div {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-.chickenContainer p {
-  color: #ffffff;
-  display: block;
-  margin: 150px 0 0 165px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
 .chickenContainer {
     width: 500px;
     height: 500px;
     border-radius: 100%;
-    border: 2px solid #e5e5e5;
+    border: 10px dotted #ffffff;
     opacity: 0.99;
     transform: scale(0.4, 0.4);
-    margin: -150px 0 -125px 0;
+    margin: -150px;
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.chickenContainer.selected{
+    border: 10px #156d6d;
+    border-style: solid solid dashed solid;
+}
+
+.chickenContainer div {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .chicken {

@@ -13,13 +13,17 @@
 </head>
 
 <body>
-  <div class="row" id="controlRow">
+  <div class="closeRow" id="controlRow">
     <p id="genepoolStats">
       <span id="genepoolId"></span> |
       <span id="organismCount"></span> |
       <span id="generationCount"></span> |
       <span id="timesBred"></span>
     </p>
+  </div>
+  <div class="row" id="buttonRow">
+    <button class="button breedButton" onclick="breedGenepoolButtonClicked()" id="breedButton">Breed</button>
+    <button class="button killButton" onclick="cullGenepoolButtonClicked()"  id="cullButton">Cull</button>
   </div>
   <div id="chickenRowHolder"></div>
   <!-- Bootstrap core JavaScript
@@ -29,6 +33,7 @@
   <script src="./js/chickenVisualizer.js"></script>
   <script src="./js/dnaToChicken.js"></script>
   <script src="./js/dnaExtractor.js"></script>
+  <script src="./js/visualizerInput.js"></script>
 </body>
 
 </html>

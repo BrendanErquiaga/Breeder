@@ -1,8 +1,7 @@
 "use strict";
 
 var chickenRowBlock = '<div class="row"></row>',
-  chickenBlock = '<div class="chickenContainer" id="customChicken1"><div class="chicken"><div class="wing"></div><div class="eye"></div><div class="beak_top"></div><div class="crest crest1"></div><div class="crest crest2"></div><div class="crest crest3"></div><div class="wattle"></div></div><p>ID: <span class="chickenId"></span><br>Name: <span class="chickenName"></span></p></div>"',
-  chickenCount = 0,
+  chickenBlock = '<div class="chickenContainer" onclick="chickenContainerSelected(this)"><div class="chicken"><div class="wing"></div><div class="eye"></div><div class="beak_top"></div><div class="crest crest1"></div><div class="crest crest2"></div><div class="crest crest3"></div><div class="wattle"></div></div></div>"',
   getChickenURL = "https://du1ejfbfoe.execute-api.us-west-2.amazonaws.com/DEV/organism/",
   getGenepoolURL= "https://oy0br9jib0.execute-api.us-west-2.amazonaws.com/DEV/",
   genepoolID, genepoolObject, loadedChickens = [];
@@ -75,7 +74,7 @@ function callGetChickenURL(chickenID, newGenerationID) {
 }
 
 function addCustomChicken(chickenDNA, newGenerationID) {
-  var newChickenID = "chicken" + chickenCount++,
+  var newChickenID = "chicken_" + chickenDNA.id,
       newBlock = $(chickenBlock).attr('id', newChickenID);
 
   newBlock.appendTo("#" + newGenerationID);
@@ -92,8 +91,8 @@ function loadCustomChicken(chickenBlockId, chicken) {
   $(chickenParent).find(".crest").css("background-color", chicken.WattleColor);
   $(chickenParent).find(".wattle").css("background-color", chicken.WattleColor);
 
-  $(chickenParent).find(".chickenId").html(chicken.id);
-  $(chickenParent).find(".chickenName").html(chicken.name);
+  // $(chickenParent).find(".chickenId").html(chicken.id);
+  // $(chickenParent).find(".chickenName").html(chicken.name);
 
   loadedChickens.push(chicken);
   console.log(loadedChickens);
