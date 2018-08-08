@@ -39,10 +39,10 @@ function fetchGenepool() {
 function genepoolFetched(genepoolData) {
   genepoolObject = genepoolData;
 
-  $("#genepoolId").html("id: " + genepoolObject.id);
-  $("#organismCount").html("organisms: " + genepoolObject.organismsInGenepool.length);
-  $("#generationCount").html("generations: " + genepoolObject.genepoolGenerations.length);
-  $("#timesBred").html("breedings: " + genepoolObject.timesBred);
+  $("#genepoolId").html("ID: " + genepoolObject.id);
+  $("#organismCount").html("Organisms: " + genepoolObject.organismsInGenepool.length);
+  $("#generationCount").html("Generations: " + genepoolObject.genepoolGenerations.length);
+  $("#timesBred").html("Breedings: " + genepoolObject.timesBred);
 
   loadGenerations();
 }
