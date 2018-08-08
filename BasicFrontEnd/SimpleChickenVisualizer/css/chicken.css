@@ -19,6 +19,7 @@
     border: 2px solid #e5e5e5;
     opacity: 0.99;
     transform: scale(0.4, 0.4);
+    margin: -150px 0 -125px 0;
 }
 
 .chicken {
