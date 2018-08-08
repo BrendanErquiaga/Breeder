@@ -1,13 +1,14 @@
 body {
-    display: flex;
     background-color: #4f5f7a;
 }
 
-.chickenRow {
+.row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin: 15px 0 15px 0;
+    border-bottom: 2px solid #e5e5e5;
 }
 
 #genepoolStats {

@@ -1,6 +1,7 @@
 "use strict";
 
-var chickenBlock = '<div class="chickenContainer" id="customChicken1"><div class="chicken"><div class="wing"></div><div class="eye"></div><div class="beak_top"></div><div class="crest crest1"></div><div class="crest crest2"></div><div class="crest crest3"></div><div class="wattle"></div></div><p>ID: <span class="chickenId"></span><br>Name: <span class="chickenName"></span></p></div>"',
+var chickenRowBlock = '<div class="row"></row>',
+  chickenBlock = '<div class="chickenContainer" id="customChicken1"><div class="chicken"><div class="wing"></div><div class="eye"></div><div class="beak_top"></div><div class="crest crest1"></div><div class="crest crest2"></div><div class="crest crest3"></div><div class="wattle"></div></div><p>ID: <span class="chickenId"></span><br>Name: <span class="chickenName"></span></p></div>"',
   chickenCount = 0,
   getChickenURL = "https://du1ejfbfoe.execute-api.us-west-2.amazonaws.com/DEV/organism/",
   getGenepoolURL= "https://oy0br9jib0.execute-api.us-west-2.amazonaws.com/DEV/",
@@ -37,25 +38,35 @@ function fetchGenepool() {
 
 function genepoolFetched(genepoolData) {
   genepoolObject = genepoolData;
-  console.log(genepoolObject);
 
   $("#genepoolId").html("id: " + genepoolObject.id);
   $("#organismCount").html("organisms: " + genepoolObject.organismsInGenepool.length);
   $("#generationCount").html("generations: " + genepoolObject.genepoolGenerations.length);
   $("#timesBred").html("breedings: " + genepoolObject.timesBred);
 
-  loadChickens();
+  loadGenerations();
 }
 
-function loadChickens() {
-  for (var i = 0; i < genepoolObject.organismsInGenepool.length; i++) {
-    callGetChickenURL(genepoolObject.organismsInGenepool[i]);
+function loadGenerations() {
+  for (var i = 0; i < genepoolObject.genepoolGenerations.length; i++) {
+    loadGeneration(genepoolObject.genepoolGenerations[i]);
   }
 }
 
-function callGetChickenURL(chickenID) {
+function loadGeneration(generation, generationID) {
+  var newGenerationID = "generationRow_" + genepoolID,
+      newGenerationBlock = $(chickenRowBlock).attr('id', newGenerationID);
+
+  newGenerationBlock.appendTo("#chickenRowHolder");
+
+  for (var i = 0; i < generation.length; i++) {
+    callGetChickenURL(generation[i], newGenerationID);
+  }
+}
+
+function callGetChickenURL(chickenID, newGenerationID) {
   var request = $.get(getChickenURL + chickenID, function(data) {
-    addCustomChicken(data);
+    addCustomChicken(data, newGenerationID);
   });
 
   request.fail(function() {
@@ -63,11 +74,11 @@ function callGetChickenURL(chickenID) {
   });
 }
 
-function addCustomChicken(chickenDNA) {
+function addCustomChicken(chickenDNA, newGenerationID) {
   var newChickenID = "chicken" + chickenCount++,
       newBlock = $(chickenBlock).attr('id', newChickenID);
 
-  newBlock.appendTo(".chickenRow");
+  newBlock.appendTo("#" + newGenerationID);
 
   loadCustomChicken(newChickenID, getChickenObject(chickenDNA));
 }

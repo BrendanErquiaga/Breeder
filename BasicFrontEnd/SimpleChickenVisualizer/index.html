@@ -1,31 +1,34 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Chickens!</title>
-    <link href="./css/chicken.css" rel="stylesheet">
-    <link href="./css/visualizer.css" rel="stylesheet">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <body>
-    <div id="genepoolStats">
-      <p id="genepoolId"></p>
-      <p id="organismCount"></p>
-      <p id="generationCount"></p>
-      <p id="timesBred"></p>
-    </div>
-    <div class="chickenRow"></div>
+  <title>Chickens!</title>
+  <link href="./css/chicken.css" rel="stylesheet">
+  <link href="./css/visualizer.css" rel="stylesheet">
+</head>
 
-    <!-- Bootstrap core JavaScript
+<body>
+  <div class="row" id="controlRow">
+    <p id="genepoolStats">
+      <span id="genepoolId"></span>
+      <span id="organismCount"></span>
+      <span id="generationCount"></span>
+      <span id="timesBred"></span>
+    </p>
+  </div>
+  <div id="chickenRowHolder"></div>
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery-3.3.1.min.js"></script>
-    <script src="./js/chickenVisualizer.js"></script>
-    <script src="./js/dnaToChicken.js"></script>
-    <script src="./js/dnaExtractor.js"></script>
-  </body>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="./js/jquery-3.3.1.min.js"></script>
+  <script src="./js/chickenVisualizer.js"></script>
+  <script src="./js/dnaToChicken.js"></script>
+  <script src="./js/dnaExtractor.js"></script>
+</body>
+
 </html>
