@@ -1,0 +1,9 @@
+{
+  "newChildrenIds": ["1533774934520"],
+  "message": "Successfully bred Genepool.",
+  "breedingPairs": [{
+    "parentTwoId": "1",
+    "parentOneId": "2",
+    "childId": "1533774934520"
+  }]
+}

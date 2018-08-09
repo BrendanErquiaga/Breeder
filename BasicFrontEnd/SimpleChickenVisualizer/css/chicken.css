@@ -99,3 +99,24 @@
     top: -100px;
     z-index: -2;
 }
+
+.egg {
+    z-index: auto;
+    width: 126px;
+    height: 180px;
+    top: 160px;
+    left: 187px;
+    position: relative;
+    -webkit-border-radius: 50% / 60% 60% 40% 40%;
+    border-radius: 50% / 60% 60% 40% 40%;
+    background: #f2f2f2;
+    animation: wiggle 1s infinite;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+   80% { transform: rotate(0deg); }
+   85% { transform: rotate(5deg); }
+   95% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}

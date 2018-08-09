@@ -1,3 +1,4 @@
+/* Color spec 1 */
 :root {
   --yellow: #f2c45a;
   --tan: #bfb35a;
@@ -9,6 +10,19 @@
   --light-grey-transparent: rgb(102,102,102, 0.3);
   --dark-grey: #444444;
 }
+
+/* Color spec 2 */
+/* :root {
+  --yellow: #d3b82b;
+  --tan: #e0a03f;
+  --mild-green: #acab41;
+  --med-green: #adeaae;
+  --strong-green: #f59450;
+  --red: #cb625c;
+  --light-grey: #abb291;
+  --light-grey-transparent: rgb(171, 178, 145, 0.3);
+  --dark-grey: #432e2b;
+} */
 
 body {
     background-color: var(--yellow);
@@ -42,6 +56,14 @@ body {
 
 button:hover {
   opacity: 0.95;
+}
+
+button:active {
+  opacity: 1;
+}
+
+button:disabled {
+  opacity: 0.1;
 }
 
 .button {

@@ -17,9 +17,34 @@ function chickenToggled(chickenId) {
 }
 
 function breedGenepoolButtonClicked() {
-  console.log("This should start the breeding process!");
+  breedGenepool();
 }
 
 function cullGenepoolButtonClicked() {
   console.log("This should start the culling process!");
+}
+
+function disableBreedButton() {
+  console.log("Disabling breed button...");
+  disableElementById("#breedButton");
+}
+
+function disableCullButton() {
+  disableElementById("#cullButton");
+}
+
+function enableBreedButton() {
+  enableElementById("#breedButton");
+}
+
+function enableCullButton() {
+  enableElementById("#cullButton");
+}
+
+function disableElementById(elementId) {
+  $(elementId).prop('disabled', true);
+}
+
+function enableElementById(elementId) {
+  $(elementId).prop('disabled', false);
 }
