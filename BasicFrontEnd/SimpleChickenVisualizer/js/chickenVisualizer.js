@@ -6,6 +6,7 @@ var chickenRowBlock = '<div class="row"></row>',
   getChickenURL = "https://du1ejfbfoe.execute-api.us-west-2.amazonaws.com/DEV/organism/",
   getGenepoolURL= "https://oy0br9jib0.execute-api.us-west-2.amazonaws.com/DEV/",
   breedGenepoolPath= "/breed",
+  cullGenepoolPath= "/cull",
   loadedChickens = [],
   expectedChildren = [],
   generationCount = 0,
@@ -93,8 +94,6 @@ function addCustomChicken(chickenDNA, newGenerationID) {
 }
 
 function loadCustomChicken(chickenBlockId, chicken) {
-
-
   var chickenParent = $("#" + chickenBlockId);
 
   $(chickenParent).find(".chicken").css("background-color", chicken.FeatherColor1);
@@ -117,8 +116,7 @@ function breedGenepool() {
     return;
   }
 
-  disableBreedButton();
-  console.log("Sending Breed Genepool Request");
+  disableAllButtons();
   var breedGenepoolURL = getGenepoolURL + genepoolID + breedGenepoolPath,
     request = $.post(breedGenepoolURL, function(data) {
       genepoolBredSuccessfull(data);
@@ -126,26 +124,26 @@ function breedGenepool() {
 
   request.fail(function(data) {
     console.error("Error breeding genepool: " + data);
+    enableAllButtons();
   });
 }
 
 function breedingFinished() {
-  console.log("Breeding finished!");
-  enableBreedButton();
+  enableAllButtons();
   generationCount++;
 }
 
 function genepoolBredSuccessfull(responseMessage) {
-  console.log(responseMessage);
   addExpectedChildren(JSON.parse(responseMessage.newChildrenIds));
-  console.log(expectedChildren);
   checkIfBreedingFinished();
   kickOffExpectedChildrenRequests();
+
+  //TODO Update Genepool Stats
 }
 
 function checkIfBreedingFinished() {
-  console.log("Checking if breeding finished...");
-  console.log(expectedChildren);
+  //console.log("Checking if breeding finished...");
+  //console.log(expectedChildren);
   if(expectedChildren.length <= 0) {
     breedingFinished();
   }
@@ -162,14 +160,14 @@ function kickOffExpectedChildrenRequests() {
 function kickOffExpectedChildRequest(chickenId) {
   var currentDelay = (hasBred) ? breedShortDelay : breedLongDelay;
 
-  console.log("Sending request for chickenID: " + chickenId + " in " + currentDelay + "ms.");
+  //console.log("Sending request for chickenID: " + chickenId + " in " + currentDelay + "ms.");
   setTimeout(function() {
     attemptToGetExpectedChicken(chickenId);
   }, currentDelay);
 }
 
 function attemptToGetExpectedChicken(chickenID) {
-  console.log("Sending request for chickenID: " + chickenID);
+  //console.log("Sending request for chickenID: " + chickenID);
   var request = $.get(getChickenURL + chickenID, function(data) {
     replaceExpectedChild(data, chickenID);
     expectedChildren.remove(chickenID);
@@ -186,7 +184,7 @@ function replaceExpectedChild(chickenDNA, chickenID) {
   var chickenBlockId = "chicken_" +  chickenID;
   $("#chicken_" +  chickenID).remove();
 
-  console.log("Should have removed egg for: " + chickenBlockId);
+  //console.log("Should have removed egg for: " + chickenBlockId);
 
   addCustomChicken(chickenDNA, "generationRow_" + generationCount);
 }
@@ -213,4 +211,56 @@ Array.prototype.remove = function(x) {
             this.splice(i,1)
         }
     }
+}
+
+// ~~~~~~~~~~~~~~~~~~ CULLING ~~~~~~~~~~~~~~~~~~
+
+function cullGenepool() {
+  if(genepoolID === undefined) {
+    console.warn("No GenepoolID present. Can't cull...");
+    return;
+  }
+
+  disableAllButtons();
+
+  var cullGenepoolURL = getGenepoolURL + genepoolID + cullGenepoolPath,
+    request = $.post(cullGenepoolURL, {}, function(data) {
+      genepoolCullSuccessful(data);
+    }, "text");
+
+  request.fail(function(data) {
+    console.error("Error culling genepool ->");
+    console.log(data);
+    enableAllButtons();
+  });
+}
+
+function cullingFinished() {
+  enableAllButtons();
+}
+
+function genepoolCullSuccessful(responseMessage) {
+  //console.log(responseMessage);
+  removeChickensFromLoadedChickenArray(genepoolObject.genepoolGenerations[0]);
+
+  $("#chickenRowHolder").children(':first-child').remove();
+
+  cullingFinished();
+  //TODO Update Genepool Stats
+}
+
+function removeChickensFromLoadedChickenArray(culledChickenArray) {
+  var chickensToRemove = [];
+
+  for(var i = 0; i < culledChickenArray.length; i++) {
+    for(var j = 0; j < loadedChickens.length; j++) {
+      if(loadedChickens[j].id === culledChickenArray[i]) {
+        chickensToRemove.push(loadedChickens[j]);
+      }
+    }
+  }
+
+  loadedChickens = loadedChickens.filter(function(el) {
+    return chickensToRemove.indexOf(el) < 0;
+  });
 }

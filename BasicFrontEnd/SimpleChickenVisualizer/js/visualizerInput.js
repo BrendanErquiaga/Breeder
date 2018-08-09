@@ -21,23 +21,16 @@ function breedGenepoolButtonClicked() {
 }
 
 function cullGenepoolButtonClicked() {
-  console.log("This should start the culling process!");
+  cullGenepool();
 }
 
-function disableBreedButton() {
-  console.log("Disabling breed button...");
+function disableAllButtons() {
   disableElementById("#breedButton");
-}
-
-function disableCullButton() {
   disableElementById("#cullButton");
 }
 
-function enableBreedButton() {
+function enableAllButtons() {
   enableElementById("#breedButton");
-}
-
-function enableCullButton() {
   enableElementById("#cullButton");
 }
 
