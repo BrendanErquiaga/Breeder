@@ -29,15 +29,15 @@ function attemptToLoadGenepool() {
 
   if(urlParams.has('genepoolID')) {
     genepoolID = urlParams.get('genepoolID');
-    fetchGenepool();
+    fetchGenepool(true);
   } else {
     console.warn("No genepool present this page won't do anything... Probably add some helper text");
   }
 }
 
-function fetchGenepool() {
+function fetchGenepool(shouldLoadChickens) {
     var request = $.get(getGenepoolURL + genepoolID, function(data) {
-      genepoolFetched(data);
+      genepoolFetched(data, shouldLoadChickens);
     });
 
     request.fail(function() {
@@ -45,7 +45,8 @@ function fetchGenepool() {
     });
 }
 
-function genepoolFetched(genepoolData) {
+function genepoolFetched(genepoolData, shouldLoadChickens) {
+  console.log("Genepool loaded. shouldLoadChickens: " + shouldLoadChickens);
   genepoolObject = genepoolData;
 
   $("#genepoolId").html("ID: " + genepoolObject.id);
@@ -53,7 +54,9 @@ function genepoolFetched(genepoolData) {
   $("#generationCount").html("Generations: " + genepoolObject.genepoolGenerations.length);
   $("#timesBred").html("Breedings: " + genepoolObject.timesBred);
 
-  loadGenerations();
+  if(shouldLoadChickens) {
+    loadGenerations();
+  }
 }
 
 function loadGenerations() {
@@ -120,6 +123,7 @@ function breedGenepool() {
   var breedGenepoolURL = getGenepoolURL + genepoolID + breedGenepoolPath,
     request = $.post(breedGenepoolURL, function(data) {
       genepoolBredSuccessfull(data);
+      fetchGenepool(false);
     });
 
   request.fail(function(data) {
@@ -226,6 +230,7 @@ function cullGenepool() {
   var cullGenepoolURL = getGenepoolURL + genepoolID + cullGenepoolPath,
     request = $.post(cullGenepoolURL, {}, function(data) {
       genepoolCullSuccessful(data);
+      fetchGenepool(false);
     }, "text");
 
   request.fail(function(data) {
