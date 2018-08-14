@@ -1,4 +1,5 @@
 {
+  "id" : "farm_1",
   "type": "chicken",
   "metadata": {
     "name": "Farm 1"
