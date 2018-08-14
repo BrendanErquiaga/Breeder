@@ -1,11 +1,7 @@
 {
-  "id" : "3",
   "type": "chicken",
   "metadata": {
-    "name": "Burnt Chicken"
-  },
-  "breedingRules" : {
-    "restrictions" : "type"
+    "name": "Death Layer 2"
   },
   "dna": {
     "chromosomes": [{
@@ -13,21 +9,21 @@
       "traits": [{
         "traitId": "FeatherColor1",
         "geneA": {
-          "expressionValue": "5773381",
-          "combinationValue": "1"
+          "expressionValue": "15526891",
+          "combinationValue": "0"
         },
         "geneB": {
-          "expressionValue": "5773381",
-          "combinationValue": "1"
+          "expressionValue": "16316664",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "FeatherColor2",
         "geneA": {
-          "expressionValue": "9440319",
-          "combinationValue": "1"
+          "expressionValue": "1183761",
+          "combinationValue": "0"
         },
         "geneB": {
-          "expressionValue": "0",
+          "expressionValue": "1643797",
           "combinationValue": "0"
         }
       }, {
@@ -43,54 +39,64 @@
       }, {
         "traitId": "BeakColor",
         "geneA": {
-          "expressionValue": "FFC300",
-          "combinationValue": "1"
+          "expressionValue": "10131892",
+          "combinationValue": "0.75"
         },
         "geneB": {
-          "expressionValue": "0",
-          "combinationValue": "0"
+          "expressionValue": "13026772",
+          "combinationValue": "0.25"
         }
       }, {
         "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "FF5733",
-          "combinationValue": "1"
+          "expressionValue": "8853533",
+          "combinationValue": "0.75"
         },
         "geneB": {
-          "expressionValue": "FF5733",
-          "combinationValue": "1"
+          "expressionValue": "8853533",
+          "combinationValue": "0.25"
         }
       }]
     }, {
       "chromosomeID": "Physical",
       "traits": [{
-        "traitId": "Size",
+        "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "7",
+          "expressionValue": "8853533",
           "combinationValue": "1"
         },
         "geneB": {
+          "expressionValue": "8853533",
+          "combinationValue": "0"
+        }
+      }, {
+        "traitId": "Size",
+        "geneA": {
           "expressionValue": "10",
           "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "8",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "LifeSpan",
         "geneA": {
-          "expressionValue": "10",
-          "combinationValue": "1"
+          "expressionValue": "17",
+          "combinationValue": "0"
         },
         "geneB": {
-          "expressionValue": "9",
-          "combinationValue": "1"
+          "expressionValue": "15",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "Sex",
         "geneA": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         }
       }]

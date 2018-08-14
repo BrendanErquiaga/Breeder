@@ -1,8 +1,8 @@
 {
-  "id": "1",
+  "id": "4",
   "type": "chicken",
   "metadata": {
-    "name": "Leghorn 2"
+    "name": "Tropical 2"
   },
   "breedingRules" : {
     "restrictions" : "type"
@@ -13,21 +13,21 @@
       "traits": [{
         "traitId": "FeatherColor1",
         "geneA": {
-          "expressionValue": "16777215",
+          "expressionValue": "11134669",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
+          "expressionValue": "11133414",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "FeatherColor2",
         "geneA": {
-          "expressionValue": "16777215",
+          "expressionValue": "14478786",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "1929977",
+          "expressionValue": "14483438",
           "combinationValue": "0"
         }
       }, {
@@ -43,22 +43,22 @@
       }, {
         "traitId": "BeakColor",
         "geneA": {
-          "expressionValue": "16758049",
+          "expressionValue": "16765877",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "0",
-          "combinationValue": "0"
+          "expressionValue": "16775349",
+          "combinationValue": "0.5"
         }
       }, {
         "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "16720205",
+          "expressionValue": "16747668",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "16720205",
-          "combinationValue": "1"
+          "expressionValue": "16747697",
+          "combinationValue": "0"
         }
       }]
     }, {
@@ -66,11 +66,11 @@
       "traits": [{
         "traitId": "Size",
         "geneA": {
-          "expressionValue": "9",
+          "expressionValue": "6",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "5",
+          "expressionValue": "8",
           "combinationValue": "1"
         }
       }, {
@@ -80,17 +80,17 @@
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "14",
+          "expressionValue": "18",
           "combinationValue": "1"
         }
       }, {
         "traitId": "Sex",
         "geneA": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         }
       }]

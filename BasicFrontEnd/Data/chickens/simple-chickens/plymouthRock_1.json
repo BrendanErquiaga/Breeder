@@ -1,8 +1,8 @@
 {
-  "id" : "3",
+  "id": "0",
   "type": "chicken",
   "metadata": {
-    "name": "Burnt Chicken"
+    "name": "Plymouth Rock 1"
   },
   "breedingRules" : {
     "restrictions" : "type"
@@ -13,37 +13,37 @@
       "traits": [{
         "traitId": "FeatherColor1",
         "geneA": {
-          "expressionValue": "5773381",
+          "expressionValue": "0",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "5773381",
-          "combinationValue": "1"
+          "expressionValue": "5263440",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "FeatherColor2",
         "geneA": {
-          "expressionValue": "9440319",
+          "expressionValue": "16777215",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "0",
-          "combinationValue": "0"
+          "expressionValue": "16777215",
+          "combinationValue": "1"
         }
       }, {
         "traitId": "FeatherPattern",
         "geneA": {
-          "expressionValue": "3",
+          "expressionValue": "2",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "3",
+          "expressionValue": "2",
           "combinationValue": "1"
         }
       }, {
         "traitId": "BeakColor",
         "geneA": {
-          "expressionValue": "FFC300",
+          "expressionValue": "16758049",
           "combinationValue": "1"
         },
         "geneB": {
@@ -53,11 +53,11 @@
       }, {
         "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "FF5733",
+          "expressionValue": "16720205",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "FF5733",
+          "expressionValue": "16720205",
           "combinationValue": "1"
         }
       }]
@@ -66,11 +66,11 @@
       "traits": [{
         "traitId": "Size",
         "geneA": {
-          "expressionValue": "7",
+          "expressionValue": "13",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "10",
+          "expressionValue": "9",
           "combinationValue": "1"
         }
       }, {

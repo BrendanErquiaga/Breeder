@@ -1,11 +1,7 @@
 {
-  "id": "0",
   "type": "chicken",
   "metadata": {
-    "name": "Plymouth Rock 1"
-  },
-  "breedingRules" : {
-    "restrictions" : "type"
+    "name": "Death Layer 1"
   },
   "dna": {
     "chromosomes": [{
@@ -13,22 +9,22 @@
       "traits": [{
         "traitId": "FeatherColor1",
         "geneA": {
-          "expressionValue": "0",
-          "combinationValue": "1"
+          "expressionValue": "15526891",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "5263440",
+          "expressionValue": "16316664",
           "combinationValue": "0"
         }
       }, {
         "traitId": "FeatherColor2",
         "geneA": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
+          "expressionValue": "1183761",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
+          "expressionValue": "1643797",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "FeatherPattern",
@@ -43,54 +39,64 @@
       }, {
         "traitId": "BeakColor",
         "geneA": {
-          "expressionValue": "16758049",
-          "combinationValue": "1"
+          "expressionValue": "10131892",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "0",
-          "combinationValue": "0"
+          "expressionValue": "13026772",
+          "combinationValue": "0.5"
         }
       }, {
         "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "16720205",
-          "combinationValue": "1"
+          "expressionValue": "8853533",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "16720205",
-          "combinationValue": "1"
+          "expressionValue": "8853533",
+          "combinationValue": "0.5"
         }
       }]
     }, {
       "chromosomeID": "Physical",
       "traits": [{
-        "traitId": "Size",
+        "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "13",
+          "expressionValue": "8853533",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "9",
-          "combinationValue": "1"
+          "expressionValue": "8853533",
+          "combinationValue": "0"
         }
       }, {
-        "traitId": "LifeSpan",
+        "traitId": "Size",
         "geneA": {
           "expressionValue": "10",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "9",
-          "combinationValue": "1"
+          "expressionValue": "8",
+          "combinationValue": "0"
+        }
+      }, {
+        "traitId": "LifeSpan",
+        "geneA": {
+          "expressionValue": "17",
+          "combinationValue": "0"
+        },
+        "geneB": {
+          "expressionValue": "15",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "Sex",
         "geneA": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         }
       }]

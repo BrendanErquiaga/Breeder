@@ -1,11 +1,7 @@
 {
-  "id": "1",
   "type": "chicken",
   "metadata": {
-    "name": "Leghorn 2"
-  },
-  "breedingRules" : {
-    "restrictions" : "type"
+    "name": "Friesian 1"
   },
   "dna": {
     "chromosomes": [{
@@ -13,22 +9,22 @@
       "traits": [{
         "traitId": "FeatherColor1",
         "geneA": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
+          "expressionValue": "14840371",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
+          "expressionValue": "15507574",
+          "combinationValue": "0.5"
         }
       }, {
         "traitId": "FeatherColor2",
         "geneA": {
-          "expressionValue": "16777215",
-          "combinationValue": "1"
+          "expressionValue": "14848626",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "1929977",
-          "combinationValue": "0"
+          "expressionValue": "15713201",
+          "combinationValue": "0.5"
         }
       }, {
         "traitId": "FeatherPattern",
@@ -38,59 +34,69 @@
         },
         "geneB": {
           "expressionValue": "1",
-          "combinationValue": "0"
+          "combinationValue": "1"
         }
       }, {
         "traitId": "BeakColor",
         "geneA": {
-          "expressionValue": "16758049",
-          "combinationValue": "1"
+          "expressionValue": "15712846",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "0",
+          "expressionValue": "15712846",
           "combinationValue": "0"
         }
       }, {
         "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "16720205",
-          "combinationValue": "1"
+          "expressionValue": "8659210",
+          "combinationValue": "0.5"
         },
         "geneB": {
-          "expressionValue": "16720205",
-          "combinationValue": "1"
+          "expressionValue": "8653330",
+          "combinationValue": "0.5"
         }
       }]
     }, {
       "chromosomeID": "Physical",
       "traits": [{
-        "traitId": "Size",
+        "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "9",
+          "expressionValue": "8659210",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "5",
+          "expressionValue": "8653330",
+          "combinationValue": "0"
+        }
+      }, {
+        "traitId": "Size",
+        "geneA": {
+          "expressionValue": "10",
           "combinationValue": "1"
+        },
+        "geneB": {
+          "expressionValue": "8",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "LifeSpan",
         "geneA": {
           "expressionValue": "17",
-          "combinationValue": "1"
+          "combinationValue": "0"
         },
         "geneB": {
-          "expressionValue": "14",
-          "combinationValue": "1"
+          "expressionValue": "15",
+          "combinationValue": "0"
         }
       }, {
         "traitId": "Sex",
         "geneA": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "1",
+          "expressionValue": "0",
           "combinationValue": "1"
         }
       }]

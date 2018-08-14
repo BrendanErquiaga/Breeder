@@ -1,8 +1,8 @@
 {
-  "id": "1",
+  "id" : "3",
   "type": "chicken",
   "metadata": {
-    "name": "Leghorn 2"
+    "name": "Burnt Chicken 1"
   },
   "breedingRules" : {
     "restrictions" : "type"
@@ -13,21 +13,21 @@
       "traits": [{
         "traitId": "FeatherColor1",
         "geneA": {
-          "expressionValue": "16777215",
+          "expressionValue": "5773381",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "16777215",
+          "expressionValue": "5773381",
           "combinationValue": "1"
         }
       }, {
         "traitId": "FeatherColor2",
         "geneA": {
-          "expressionValue": "16777215",
+          "expressionValue": "9440319",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "1929977",
+          "expressionValue": "0",
           "combinationValue": "0"
         }
       }, {
@@ -38,12 +38,12 @@
         },
         "geneB": {
           "expressionValue": "1",
-          "combinationValue": "0"
+          "combinationValue": "1"
         }
       }, {
         "traitId": "BeakColor",
         "geneA": {
-          "expressionValue": "16758049",
+          "expressionValue": "16764709",
           "combinationValue": "1"
         },
         "geneB": {
@@ -53,11 +53,11 @@
       }, {
         "traitId": "WattleColor",
         "geneA": {
-          "expressionValue": "16720205",
+          "expressionValue": "16734003",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "16720205",
+          "expressionValue": "16734003",
           "combinationValue": "1"
         }
       }]
@@ -66,21 +66,21 @@
       "traits": [{
         "traitId": "Size",
         "geneA": {
-          "expressionValue": "9",
+          "expressionValue": "7",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "5",
+          "expressionValue": "10",
           "combinationValue": "1"
         }
       }, {
         "traitId": "LifeSpan",
         "geneA": {
-          "expressionValue": "17",
+          "expressionValue": "10",
           "combinationValue": "1"
         },
         "geneB": {
-          "expressionValue": "14",
+          "expressionValue": "9",
           "combinationValue": "1"
         }
       }, {
