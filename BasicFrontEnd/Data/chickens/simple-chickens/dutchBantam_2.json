@@ -11,11 +11,11 @@
         "traitId": "FeatherColor1",
         "geneA": {
           "expressionValue": "2827800",
-          "combinationValue": "0.6"
+          "combinationValue": "0.5"
         },
         "geneB": {
           "expressionValue": "3749430",
-          "combinationValue": "0.4"
+          "combinationValue": "0"
         }
       }, {
         "traitId": "FeatherColor2",
