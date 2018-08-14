@@ -65,9 +65,6 @@ public class OrganismRequestUtils {
         } else if(!organismJson.containsKey(ORGANISM_TYPE_KEY)) {
             logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ ORGANISM_TYPE_KEY);
             isValid = false;
-        } else if(!organismJson.containsKey(BREEDING_RULES_KEY)) {
-            logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ BREEDING_RULES_KEY);
-            isValid = false;
         } else if(!organismJson.containsKey(METADATA_KEY)) {
             logger.log(ORGANISM_JSON_MISSING_KEY_MESSAGE+ METADATA_KEY);
             isValid = false;
